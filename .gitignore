@@ -1,24 +1,39 @@
-# Local and potentially sensitive workspaces; never publish by default
+# User/runtime data: visible at repository root, never committed
 /workspace/
 /projects/
 /output/
 /cache/
-/feedback/reviews/
-/input/*
-!/input/README.md
-knowledge-base/candidates/
-knowledge-base/decisions/*.json
-knowledge-base/projects/*.json
-knowledge-base/patterns/*.json
-knowledge-base/best-practices/*.json
-knowledge-base/knowledge-health-report.json
-skills/registry.json
-# Runtime copy of the included design template
-templates/*/master.pptx
+/feedback/
+/input/
+
+# Runtime compatibility links inside the single technical folder
+/technical/workspace
+/technical/projects
+/technical/output
+/technical/cache
+/technical/feedback
+/technical/input
+/technical/examples
+/technical/PPT设计规范
+
+# Generated knowledge and local review state
+/technical/knowledge-base/candidates/
+/technical/knowledge-base/decisions/*.json
+/technical/knowledge-base/projects/*.json
+/technical/knowledge-base/patterns/*.json
+/technical/knowledge-base/best-practices/*.json
+/technical/knowledge-base/knowledge-health-report.json
+/technical/skills/registry.json
+/technical/docs/dependency-inventory.json
+
+# Runtime template copy and dependencies
+/technical/templates/*/master.pptx
+/technical/node_modules
+/technical/.venv/
+
 # Runtime/build artifacts
-/node_modules
-/.venv/
 /.chart-data-*/
+/technical/.chart-data-*/
 __pycache__/
 *.py[cod]
 *.inspect.ndjson
@@ -28,16 +43,7 @@ __pycache__/
 .env
 .env.*
 **/auth.json
-# Environment-specific golden render and generated evaluation
-/tests/golden/preview-baseline/*.png
-/tests/phase5/ab-report.json
 
-# Local audit snapshots and machine-specific project records
-/docs/clean-clone-verification.md
-/docs/final-audit.md
-/docs/v1-completion-plan.md
-/docs/v1-current-status.md
-/docs/workspace-scan.md
-/tests/phase5/ab-eval.mjs
-/tests/phase5/edited-slide-specs.json
-/tests/phase5/test-results.md
+# Environment-specific golden render and generated evaluation
+/technical/tests/golden/preview-baseline/*.png
+/technical/tests/phase5/ab-report.json

@@ -1,0 +1,2 @@
+# Generic coding agent
+Read `technical/AGENTS.md`, `technical/docs/agent-integration.md`, then run `./CPGHBPPT doctor`. Parse a user request into a project config or `./CPGHBPPT build --topic ... --type ... [--input file]`. Watch `projects/<id>/manifest.json`, honor `WAITING_*`, and return files from `projects/<id>/output`. Never assert completed strategy analysis when CLI produced an extractive report or bounded research readout.

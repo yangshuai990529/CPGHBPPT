@@ -1,2 +1,0 @@
-# Codex
-Open this repo in Codex. Its `AGENTS.md` and project-local `.agents/skills/product-ppt/SKILL.md` explain the workflow. Ask naturally: “用 Product PPT Agent ...” or use `$product-ppt` where skills are available. `/ppt` is a **project convention** that instructs the agent to invoke `./ppt`; it is not a guaranteed native Codex command. Do not install an OpenAI plugin or change global settings for this project.

@@ -2,9 +2,10 @@
 set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+TECH="$ROOT/technical"
 
 if [ "$(uname -s)" != "Darwin" ]; then
-  echo '当前自动安装脚本只在 macOS 验证。请手动安装 Node.js 22.13+、Python 3.11+ 和 Poppler 后运行 ./setup.sh。' >&2
+  echo '当前自动安装脚本只在 macOS 验证。请手动安装 Node.js 22.13+、Python 3.11+ 和 Poppler 后运行 ./technical/setup.sh。' >&2
   exit 1
 fi
 
@@ -36,13 +37,13 @@ if [ "$need_brew" -eq 1 ]; then
 fi
 
 cd "$ROOT"
-./setup.sh
+"$TECH/setup.sh"
 ./CPGHBPPT init
 
 SYSTEM_CHROME='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 if [ ! -x "$SYSTEM_CHROME" ] && ! node -e "import('playwright').then(({chromium})=>require('fs').accessSync(chromium.executablePath()))" >/dev/null 2>&1; then
   echo '未找到系统 Chrome，正在安装 Playwright Chromium…'
-  npx playwright install chromium
+  (cd "$TECH" && npx playwright install chromium)
 fi
 
 ./CPGHBPPT doctor
