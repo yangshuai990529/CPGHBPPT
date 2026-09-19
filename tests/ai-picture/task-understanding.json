@@ -1,0 +1,13 @@
+{
+  "project_id": "proj-ai-picture-overview",
+  "status": "partial",
+  "task_type": "product_overview",
+  "topic": "AI Picture",
+  "objective": "在不生成最终 PPTX 的前提下，验证从任务理解到 Slide Spec 的完整链路，并给出下一阶段的研究和决策框架。",
+  "audience": ["产品规划负责人", "画质产品经理", "研发与设计代表"],
+  "decision_needed": "是否批准进入事实研究、用户验证和方案细化阶段。",
+  "working_definition": "AI Picture 暂指利用内容、环境、设备状态或用户偏好进行画质理解、推荐、预览和应用的产品能力集合；这一定义仍需确认。",
+  "non_goals": ["生成 PPTX", "声称真实市场趋势", "声称用户已有明确痛点", "确定具体算法和参数", "承诺上线时间"],
+  "assumptions": ["本次仅验证方法与接口", "所有业务结论均为待验证假设"],
+  "open_questions": ["AI Picture 的业务目标是什么", "首期面向电视还是跨端", "是自动优化、辅助调节还是方案分享", "哪些信源和画质模式进入首期", "如何处理可解释、撤回和隐私"]
+}

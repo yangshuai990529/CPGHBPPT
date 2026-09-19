@@ -1,0 +1,23 @@
+project:
+  name: 产品策略草稿
+presentation:
+  type: product-strategy
+  audience: 产品规划团队
+  language: zh-CN
+research:
+  enabled: false
+  competitors: []
+  source_mode: provided-only
+reasoning:
+  enabled: true
+  mode: normal
+template:
+  id: tcl-product
+output:
+  pptx: false
+  preview: false
+  sources: true
+runtime:
+  offline: true
+input_files:
+  - input/strategy.md

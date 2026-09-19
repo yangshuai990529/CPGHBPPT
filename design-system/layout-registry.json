@@ -1,0 +1,755 @@
+{
+  "registry_version": "1.0.0",
+  "master_id": "tcl-product-master-v1",
+  "layouts": [
+    {
+      "layout_id": "tcl-cover-01",
+      "source_layout": "slideLayout1",
+      "source_name": "2_空白",
+      "sample_slides": [
+        1
+      ],
+      "intended_use": [
+        "cover"
+      ],
+      "verification_status": "verified",
+      "content_safe_area": "cover_title",
+      "reserved_regions": [
+        "full-slide cover artwork",
+        "top-left TCL/Olympic lockup",
+        "right-side architecture image"
+      ],
+      "editable_regions": [
+        "cover_title",
+        "cover_meta"
+      ],
+      "notes": [
+        "Keep the cover minimal",
+        "White text is used on the red field"
+      ]
+    },
+    {
+      "layout_id": "tcl-section-01",
+      "source_layout": "slideLayout4",
+      "source_name": "7_标题幻灯片",
+      "sample_slides": [
+        2
+      ],
+      "intended_use": [
+        "section"
+      ],
+      "verification_status": "verified",
+      "content_safe_area": "content_clean",
+      "reserved_regions": [
+        "content_top_right_logo",
+        "content_confidentiality",
+        "center-left T mark",
+        "content_page_number"
+      ],
+      "editable_regions": [
+        "center section title"
+      ],
+      "notes": [
+        "Sample title uses 28 pt bold PingFang SC and content red"
+      ]
+    },
+    {
+      "layout_id": "tcl-content-bird-01",
+      "source_layout": "slideLayout2",
+      "source_name": "5_标题幻灯片",
+      "sample_slides": [
+        3,
+        4
+      ],
+      "intended_use": [
+        "content",
+        "comparison",
+        "architecture",
+        "roadmap",
+        "metrics"
+      ],
+      "verification_status": "verified",
+      "content_safe_area": "content_standard",
+      "reserved_regions": [
+        "content_top_left_brand_block",
+        "content_top_right_logo",
+        "content_confidentiality",
+        "content_bird_art",
+        "content_page_number"
+      ],
+      "editable_regions": [
+        "main content canvas"
+      ],
+      "notes": [
+        "Bird artwork occupies the upper-right area",
+        "Renderer must create title/body objects within the safe area"
+      ]
+    },
+    {
+      "layout_id": "tcl-content-clean-01",
+      "source_layout": "slideLayout3",
+      "source_name": "6_标题幻灯片",
+      "sample_slides": [],
+      "intended_use": [
+        "content",
+        "data_dense_content"
+      ],
+      "verification_status": "unverified",
+      "content_safe_area": "content_clean",
+      "reserved_regions": [
+        "content_top_right_logo",
+        "content_confidentiality",
+        "content_page_number"
+      ],
+      "editable_regions": [
+        "main content canvas"
+      ],
+      "notes": [
+        "No sample slide uses this layout; verify in PowerPoint before production use"
+      ]
+    },
+    {
+      "layout_id": "tcl-ending-01",
+      "source_layout": "slideLayout5",
+      "source_name": "8_标题幻灯片",
+      "sample_slides": [
+        5
+      ],
+      "intended_use": [
+        "ending"
+      ],
+      "verification_status": "verified",
+      "content_safe_area": null,
+      "reserved_regions": [
+        "all ending-page artwork and text"
+      ],
+      "editable_regions": [],
+      "notes": [
+        "Use as supplied; do not add product content"
+      ]
+    },
+    {
+      "layout_id": "tcl-title-content-minimal-01",
+      "source_layout": "slideLayout6",
+      "source_name": "1_标题和内容",
+      "sample_slides": [],
+      "intended_use": [
+        "content"
+      ],
+      "verification_status": "unverified",
+      "content_safe_area": "content_clean",
+      "reserved_regions": [
+        "small top-right brand mark",
+        "content_page_number"
+      ],
+      "editable_regions": [
+        "title",
+        "body"
+      ],
+      "notes": [
+        "Unused by the five sample slides; placeholder behavior requires native PowerPoint verification"
+      ]
+    }
+  ],
+  "content_layouts": [
+    {
+      "layout_id": "L01_TITLE_TEXT",
+      "purpose": [
+        "explanation",
+        "definition"
+      ],
+      "supported_content": [
+        "title",
+        "body",
+        "insight",
+        "source"
+      ],
+      "min_items": 1,
+      "max_items": 6,
+      "required_components": [
+        "Title",
+        "Text"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L02_HERO_INSIGHT",
+      "purpose": [
+        "key_insight",
+        "opportunity"
+      ],
+      "supported_content": [
+        "insight",
+        "supporting_text",
+        "source"
+      ],
+      "min_items": 1,
+      "max_items": 4,
+      "required_components": [
+        "Insight"
+      ],
+      "optional_components": [
+        "Text",
+        "Source"
+      ],
+      "density": [
+        "LOW"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L01_TITLE_TEXT"
+      ]
+    },
+    {
+      "layout_id": "L03_BIG_NUMBER",
+      "purpose": [
+        "metric_summary",
+        "market_insight"
+      ],
+      "supported_content": [
+        "big_numbers",
+        "labels",
+        "source"
+      ],
+      "min_items": 1,
+      "max_items": 3,
+      "required_components": [
+        "BigNumber"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L11_CHART_INSIGHT"
+      ]
+    },
+    {
+      "layout_id": "L04_TWO_COLUMN",
+      "purpose": [
+        "comparison",
+        "explanation"
+      ],
+      "supported_content": [
+        "two_groups",
+        "text",
+        "image",
+        "chart"
+      ],
+      "min_items": 2,
+      "max_items": 8,
+      "required_components": [
+        "Text"
+      ],
+      "optional_components": [
+        "Image",
+        "Chart",
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L01_TITLE_TEXT"
+      ]
+    },
+    {
+      "layout_id": "L05_THREE_COLUMN",
+      "purpose": [
+        "three_pillars",
+        "three_groups"
+      ],
+      "supported_content": [
+        "cards",
+        "metrics",
+        "images"
+      ],
+      "min_items": 3,
+      "max_items": 6,
+      "required_components": [
+        "Card"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L06_FOUR_CARDS",
+      "purpose": [
+        "four_themes",
+        "capability_summary"
+      ],
+      "supported_content": [
+        "cards"
+      ],
+      "min_items": 4,
+      "max_items": 4,
+      "required_components": [
+        "Card"
+      ],
+      "optional_components": [
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L07_IMAGE_TEXT",
+      "purpose": [
+        "product_explanation",
+        "evidence_screenshot"
+      ],
+      "supported_content": [
+        "image",
+        "text",
+        "caption"
+      ],
+      "min_items": 2,
+      "max_items": 5,
+      "required_components": [
+        "Image",
+        "Text"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L08_COMPETITOR_3COL",
+      "purpose": [
+        "competitor_comparison"
+      ],
+      "supported_content": [
+        "competitors",
+        "limited_dimensions"
+      ],
+      "min_items": 3,
+      "max_items": 3,
+      "required_components": [
+        "ComparisonCard"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L10_COMPARISON_TABLE"
+      ]
+    },
+    {
+      "layout_id": "L09_COMPETITOR_4COL",
+      "purpose": [
+        "competitor_comparison"
+      ],
+      "supported_content": [
+        "competitors",
+        "limited_dimensions"
+      ],
+      "min_items": 4,
+      "max_items": 4,
+      "required_components": [
+        "ComparisonCard"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L10_COMPARISON_TABLE"
+      ]
+    },
+    {
+      "layout_id": "L10_COMPARISON_TABLE",
+      "purpose": [
+        "competitor_comparison",
+        "feature_comparison"
+      ],
+      "supported_content": [
+        "table",
+        "many_dimensions"
+      ],
+      "min_items": 3,
+      "max_items": 12,
+      "required_components": [
+        "Table"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L11_CHART_INSIGHT",
+      "purpose": [
+        "trend",
+        "market_insight",
+        "data_evidence"
+      ],
+      "supported_content": [
+        "chart",
+        "big_numbers",
+        "insight"
+      ],
+      "min_items": 2,
+      "max_items": 6,
+      "required_components": [
+        "Chart",
+        "Insight"
+      ],
+      "optional_components": [
+        "BigNumber",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L03_BIG_NUMBER",
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L12_2X2_MATRIX",
+      "purpose": [
+        "positioning",
+        "opportunity_prioritization"
+      ],
+      "supported_content": [
+        "matrix_items",
+        "axis_labels"
+      ],
+      "min_items": 3,
+      "max_items": 10,
+      "required_components": [
+        "Matrix2x2"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L10_COMPARISON_TABLE"
+      ]
+    },
+    {
+      "layout_id": "L13_FUNNEL",
+      "purpose": [
+        "conversion",
+        "dropoff"
+      ],
+      "supported_content": [
+        "funnel_stages"
+      ],
+      "min_items": 3,
+      "max_items": 7,
+      "required_components": [
+        "Funnel"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L10_COMPARISON_TABLE"
+      ]
+    },
+    {
+      "layout_id": "L14_PYRAMID",
+      "purpose": [
+        "hierarchy",
+        "priority"
+      ],
+      "supported_content": [
+        "layers"
+      ],
+      "min_items": 3,
+      "max_items": 6,
+      "required_components": [
+        "Pyramid"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L01_TITLE_TEXT"
+      ]
+    },
+    {
+      "layout_id": "L15_STRATEGY_HOUSE",
+      "purpose": [
+        "product_strategy"
+      ],
+      "supported_content": [
+        "goal",
+        "pillars",
+        "foundation"
+      ],
+      "min_items": 3,
+      "max_items": 8,
+      "required_components": [
+        "StrategyHouse"
+      ],
+      "optional_components": [
+        "Text",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L05_THREE_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L16_ARCHITECTURE",
+      "purpose": [
+        "product_architecture"
+      ],
+      "supported_content": [
+        "layers",
+        "modules",
+        "dependencies"
+      ],
+      "min_items": 3,
+      "max_items": 20,
+      "required_components": [
+        "Architecture"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L17_USER_JOURNEY",
+      "purpose": [
+        "user_insight",
+        "journey"
+      ],
+      "supported_content": [
+        "journey_stages",
+        "pain_points",
+        "opportunities"
+      ],
+      "min_items": 3,
+      "max_items": 6,
+      "required_components": [
+        "JourneyMap"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L18_TIMELINE"
+      ]
+    },
+    {
+      "layout_id": "L18_TIMELINE",
+      "purpose": [
+        "timeline",
+        "milestones"
+      ],
+      "supported_content": [
+        "events"
+      ],
+      "min_items": 3,
+      "max_items": 8,
+      "required_components": [
+        "TimelineItem"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L04_TWO_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L19_ROADMAP",
+      "purpose": [
+        "roadmap",
+        "phasing"
+      ],
+      "supported_content": [
+        "phases",
+        "goals",
+        "deliverables"
+      ],
+      "min_items": 3,
+      "max_items": 5,
+      "required_components": [
+        "Roadmap"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L18_TIMELINE"
+      ]
+    },
+    {
+      "layout_id": "L20_EXECUTIVE_SUMMARY",
+      "purpose": [
+        "executive_summary"
+      ],
+      "supported_content": [
+        "headline",
+        "findings",
+        "decision_request"
+      ],
+      "min_items": 2,
+      "max_items": 6,
+      "required_components": [
+        "Insight",
+        "Text"
+      ],
+      "optional_components": [
+        "Badge",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L01_TITLE_TEXT"
+      ]
+    },
+    {
+      "layout_id": "L21_COMPETITOR_VISUAL_3COL",
+      "purpose": [
+        "competitor_visual_comparison"
+      ],
+      "supported_content": [
+        "title",
+        "product_image",
+        "feature_image",
+        "comparison",
+        "source"
+      ],
+      "min_items": 2,
+      "max_items": 3,
+      "required_components": [
+        "Title",
+        "Image",
+        "Text"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L08_COMPETITOR_3COL"
+      ]
+    }
+  ]
+}

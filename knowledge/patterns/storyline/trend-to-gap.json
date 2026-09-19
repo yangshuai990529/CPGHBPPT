@@ -1,0 +1,16 @@
+{
+  "pattern_id": "TREND_TO_GAP",
+  "name": "Trend to Gap",
+  "pattern_type": "storyline",
+  "problem": "将外部趋势转化为本产品当前差距和机会，而不是停留在行业罗列。",
+  "structure": ["Industry Trend", "Competitor Evidence", "Trend Conclusion", "Current State", "Gap", "Opportunity"],
+  "when_to_use": ["外部变化是本次产品决策的重要触发因素", "能够取得本方现状和对比基准"],
+  "when_not_to_use": ["只有单一竞品功能截图", "趋势与本产品场景没有可证明联系", "内部合规或交付问题才是主要驱动"],
+  "quality_checks": ["趋势含时间和范围", "Current State 与趋势使用同一比较口径", "Opportunity 明确对象、场景和价值"],
+  "evidence": [
+    {"source": "../../../../旧PPT库/TCL Link、小T 与 Matter 专题洞察报告_v1.4.pdf", "pages": [5, 6, 7, 48], "observation": "材料从头部趋势与 TCL 现状短板，收敛到互联目标和分阶段策略。"}
+  ],
+  "limitations": ["原材料部分趋势数据仍需回到一手来源核验", "当前只在一份专题材料中观察，尚未跨主题验证"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

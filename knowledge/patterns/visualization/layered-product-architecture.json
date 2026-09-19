@@ -1,0 +1,17 @@
+{
+  "pattern_id": "LAYERED_PRODUCT_ARCHITECTURE",
+  "name": "Layered Product Architecture",
+  "pattern_type": "visualization",
+  "problem": "表达从用户价值到应用与技术基础的分层关系。",
+  "structure": ["Vision", "User Value", "Scenario", "Capability", "Application", "Platform or Technology Foundation"],
+  "when_to_use": ["层级之间存在清晰承接", "每层对象类型一致", "目标是解释产品组成和依赖"],
+  "when_not_to_use": ["只是功能列表", "层级间没有依赖", "目标是展示用户步骤或时间阶段"],
+  "quality_checks": ["层级命名互斥", "上层价值可回溯到下层能力", "技术基础不与用户场景混在同层"],
+  "evidence": [
+    {"source": "../../../../旧PPT库/AI记忆助手 V1.0 概要 [只读].pdf", "pages": [10], "observation": "产品架构页将入口、记忆数据和助手能力组织为架构。"},
+    {"source": "../../../../旧PPT库/TCL Link、小T 与 Matter 专题洞察报告_v1.4.pdf", "pages": [26, 46, 47], "observation": "材料尝试表达平台、协议、应用场景与主控/被控关系。"}
+  ],
+  "limitations": ["源页层次较复杂，Pattern 对层级进行了标准化，不能直接复刻源视觉"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

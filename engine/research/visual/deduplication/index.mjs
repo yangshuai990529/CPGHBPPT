@@ -1,0 +1,4 @@
+import sharp from 'sharp';
+export async function visualHash(bytes){const {data}=await sharp(bytes).flatten({background:'#fff'}).resize(9,8,{fit:'fill'}).greyscale().raw().toBuffer({resolveWithObject:true});let bits=0n;for(let y=0;y<8;y++)for(let x=0;x<8;x++)bits=(bits<<1n)|BigInt(data[y*9+x]>data[y*9+x+1]?1:0);return bits.toString(16).padStart(16,'0');}
+export const distance=(a,b)=>{let x=BigInt('0x'+a)^BigInt('0x'+b),n=0;while(x){x&=x-1n;n++;}return n;};
+export function deduplicate(assets){const kept=[],rejected=[];for(const a of [...assets].sort((x,y)=>(y.width*y.height)-(x.width*x.height))){const existing=kept.find(b=>b.content_hash===a.content_hash||a.perceptual_hash&&b.perceptual_hash&&distance(a.perceptual_hash,b.perceptual_hash)<=4&&a.entity===b.entity);if(existing)rejected.push({...a,status:'DUPLICATE_ASSET',duplicate_of:existing.asset_id});else kept.push(a);}return {kept,rejected};}

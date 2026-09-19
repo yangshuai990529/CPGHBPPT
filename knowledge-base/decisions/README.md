@@ -1,0 +1,1 @@
+Past decisions require exact scope, decision date, owner, rationale, alternatives, evidence, and current revalidation status. No specific past departmental decision is asserted until an authorized source is provided and confirmed.

@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-ppt-agent.local/schemas/source.schema.json",
+  "title": "Product PPT Source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "title",
+    "source_type",
+    "locator",
+    "status",
+    "supports"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "pattern": "^src-[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "enum": [
+        "user_material",
+        "internal_document",
+        "external_primary",
+        "external_secondary",
+        "dataset",
+        "interview",
+        "observation",
+        "image",
+        "webpage"
+      ]
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "accessed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "provided",
+        "verified",
+        "unverified",
+        "needed",
+        "unavailable"
+      ]
+    },
+    "publisher": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license_or_usage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authority_level": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "USER"
+      ]
+    },
+    "origin": {
+      "enum": [
+        "internal",
+        "external",
+        "user_provided"
+      ]
+    },
+    "language": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relevance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

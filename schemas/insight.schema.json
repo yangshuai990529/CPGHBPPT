@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-ppt-agent.local/schemas/insight.schema.json",
+  "title": "Product PPT Insight Node",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "insight_id",
+    "level",
+    "statement",
+    "upstream_ids",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "insight_id": {
+      "type": "string",
+      "pattern": "^(fact|int|ins|imp|opp|str|feat|hyp)-[a-z0-9-]+$"
+    },
+    "level": {
+      "enum": [
+        "FACT",
+        "INTERPRETATION",
+        "INSIGHT",
+        "IMPLICATION",
+        "OPPORTUNITY",
+        "STRATEGY",
+        "FEATURE",
+        "HYPOTHESIS"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "upstream_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^src-[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "reasoning_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "supported",
+        "challenged",
+        "rejected",
+        "needs_evidence"
+      ]
+    },
+    "counter_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision_relevance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supporting_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "FACT"
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "required": [
+          "source_ids"
+        ],
+        "properties": {
+          "source_ids": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "enum": [
+              "INTERPRETATION",
+              "INSIGHT",
+              "IMPLICATION",
+              "OPPORTUNITY",
+              "STRATEGY",
+              "FEATURE"
+            ]
+          }
+        },
+        "required": [
+          "level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "upstream_ids": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

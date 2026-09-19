@@ -1,0 +1,17 @@
+{
+  "pattern_id": "COMPETITOR_TO_OPPORTUNITY",
+  "name": "Competitor to Opportunity",
+  "pattern_type": "storyline",
+  "problem": "把多个竞品事实收敛为共同方向、未解决问题和本产品机会。",
+  "structure": ["Competitor A", "Competitor B", "Competitor C", "Common Direction", "Unsolved Problem", "Opportunity"],
+  "when_to_use": ["至少有两个可比竞品", "维度和目标用户可对齐", "需要判断跟随、差异化或不进入"],
+  "when_not_to_use": ["竞品来自不同品类且不可比", "只有营销宣称没有体验证据", "目标只是制作功能清单"],
+  "quality_checks": ["统一比较维度", "区分已实现能力与宣传", "So What 具体对应本产品", "不从竞品功能直接复制 Feature"],
+  "evidence": [
+    {"source": "../../../../旧PPT库/AI记忆助手 V1.0 概要 [只读].pdf", "pages": [3, 4, 5, 6, 7, 8, 9, 10], "observation": "材料逐个分析竞品入口、记录和管理问题，再承接产品架构。"},
+    {"source": "../../../../旧PPT库/ORL产品方案.pdf", "pages": [10], "observation": "竞品闭环分析包含入口、用户路径、产品结构和核心结论。"}
+  ],
+  "limitations": ["原材料仍存在从竞品分析快速进入方案的情况，Pattern 增加了 Opportunity 桥梁"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

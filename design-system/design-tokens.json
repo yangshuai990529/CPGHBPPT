@@ -1,0 +1,86 @@
+{
+  "token_version": "1.0.0",
+  "coordinate_system": {"unit": "inch", "origin": "top-left", "slide_width": 13.333333, "slide_height": 7.5},
+  "colors": {
+    "brand_red_primary": {"value": "#E90000", "source": "cover artwork", "brand_usage": "observed"},
+    "brand_red_secondary": {"value": "#E40013", "source": "ending text", "brand_usage": "observed"},
+    "content_red": {"value": "#FE2C23", "source": "section title", "brand_usage": "observed"},
+    "confidential_red": {"value": "#FF0000", "source": "confidentiality label", "brand_usage": "fixed_element_only"},
+    "neutral_gray": {"value": "#898989", "source": "ending URL", "brand_usage": "observed"},
+    "white": {"value": "#FFFFFF", "source": "cover text/background", "brand_usage": "observed"},
+    "office_accent_1": {"value": "#4472C4", "source": "theme1.xml", "brand_usage": "not_approved"},
+    "office_accent_2": {"value": "#ED7D31", "source": "theme1.xml", "brand_usage": "not_approved"}
+  },
+  "fonts": {
+    "cover_zh": {"family": "PingFang SC", "fallbacks": ["Microsoft YaHei", "DengXian"], "status": "observed"},
+    "section_zh": {"family": "PingFang SC", "fallbacks": ["Microsoft YaHei", "DengXian"], "status": "observed"},
+    "ending_zh": {"family": "Microsoft YaHei", "fallbacks": ["PingFang SC", "DengXian"], "status": "observed"},
+    "ending_latin": {"family": "FZLanTingHei-M-GBK", "fallbacks": ["Arial", "Microsoft YaHei"], "status": "observed_but_availability_unverified"},
+    "theme_major": {"family": "DengXian Light", "status": "theme_default_not_brand_approved"},
+    "theme_minor": {"family": "DengXian", "status": "theme_default_not_brand_approved"}
+  },
+  "typography": {
+    "cover_title": {"size_pt": 28, "weight": "regular", "color": "white"},
+    "cover_meta": {"size_pt": 18, "weight": "regular", "color": "white"},
+    "section_title": {"size_pt": 28, "weight": "bold", "color": "content_red"},
+    "confidentiality": {"size_pt": 8, "weight": "regular", "color": "confidential_red"},
+    "page_number": {"size_pt": 12, "weight": "regular", "color": "neutral_gray"},
+    "page_title": {"size_pt": 24, "weight": "semibold", "color": "#252525", "line_height": 1.12},
+    "section_title": {"size_pt": 28, "weight": "bold", "color": "content_red", "line_height": 1.1},
+    "body": {"size_pt": 17, "weight": "regular", "color": "#333333", "line_height": 1.28},
+    "body_small": {"size_pt": 14, "weight": "regular", "color": "#555555", "line_height": 1.22},
+    "caption": {"size_pt": 10, "weight": "regular", "color": "#777777", "line_height": 1.15},
+    "data_number": {"size_pt": 32, "weight": "bold", "color": "#E90000", "line_height": 1.0},
+    "card_title": {"size_pt": 16, "weight": "semibold", "color": "#252525", "line_height": 1.15},
+    "minimum_body_recommendation": {"size_pt": 14, "status": "renderer_hard_minimum"}
+  },
+  "font_weights": {"regular": 400, "medium": 500, "semibold": 600, "bold": 700},
+  "line_heights": {"tight": 1.05, "title": 1.12, "body": 1.28, "relaxed": 1.4},
+  "spacing_px": {"xs": 4, "sm": 8, "md": 16, "lg": 24, "xl": 32, "xxl": 48},
+  "margins_px": {"content_left": 120, "content_right": 208, "content_top": 124, "content_bottom": 96, "source_bottom": 58},
+  "border_radius_px": {"none": 0, "sm": 6, "md": 10, "lg": 16},
+  "line_width_px": {"hairline": 1, "regular": 1.5, "emphasis": 3},
+  "icon_size_px": {"sm": 18, "md": 24, "lg": 32},
+  "chart_style": {
+    "font_family_token": "body",
+    "label_size_pt": 11,
+    "grid_color": "#E3E3E3",
+    "axis_color": "#777777",
+    "series": ["#E90000", "#4F6B83", "#8EA6B8", "#D0D9E0"],
+    "plot_fill": "#FFFFFF"
+  },
+  "table_style": {
+    "header_fill": "#E90000",
+    "header_text": "#FFFFFF",
+    "body_fill": "#FFFFFF",
+    "alternate_fill": "#F5F6F7",
+    "border_color": "#D9D9D9",
+    "font_size_pt": 12,
+    "cell_padding_px": 8
+  },
+  "rendering_px": {
+    "slide": {"x": 0, "y": 0, "w": 1280, "h": 720},
+    "title_area": {"x": 128, "y": 28, "w": 760, "h": 42},
+    "content_safe_area": {"x": 120, "y": 124, "w": 952, "h": 500},
+    "source_area": {"x": 120, "y": 637, "w": 780, "h": 25},
+    "locked_areas": [
+      {"id": "top-left-brand", "x": 0, "y": 0, "w": 110, "h": 100},
+      {"id": "top-right-logo", "x": 1028, "y": 14, "w": 244, "h": 92},
+      {"id": "top-right-bird", "x": 1000, "y": 58, "w": 222, "h": 178},
+      {"id": "page-number", "x": 930, "y": 660, "w": 330, "h": 50}
+    ]
+  },
+  "safe_areas": {
+    "content_standard": {"x": 1.2, "y": 1.2, "w": 10.0, "h": 5.35, "status": "derived_conservative"},
+    "content_clean": {"x": 1.2, "y": 1.2, "w": 10.9, "h": 5.35, "status": "derived_conservative"},
+    "cover_title": {"x": 0.45, "y": 3.35, "w": 6.4, "h": 1.55, "status": "observed"},
+    "cover_meta": {"x": 0.72, "y": 6.66, "w": 4.16, "h": 0.41, "status": "observed"}
+  },
+  "fixed_regions": {
+    "content_top_right_logo": {"x": 10.804, "y": 0.229, "w": 2.341, "h": 0.785},
+    "content_confidentiality": {"x": 9.741, "y": 0.386, "w": 1.212, "h": 0.236},
+    "content_bird_art": {"x": 10.456, "y": 0.613, "w": 2.197, "h": 1.805},
+    "content_page_number": {"x": 9.807, "y": 6.951, "w": 3.0, "h": 0.399},
+    "content_top_left_brand_block": {"x": 0.0, "y": 0.0, "w": 1.118, "h": 0.986}
+  }
+}

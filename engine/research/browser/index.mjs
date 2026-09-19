@@ -1,0 +1,18 @@
+import { safeFetch, safeUrl } from '../source/index.mjs';import fs from 'node:fs/promises';
+export class BrowserProvider { async open(_url) { throw new Error('BrowserProvider.open not implemented'); } async screenshot(_url,_path) { throw new Error('BrowserProvider.screenshot not implemented'); } }
+export function textFromHtml(html) { return html.replace(/<!--[\s\S]*?-->/g,' ').replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&(?:nbsp|#160);/gi,' ').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/\s+/g,' ').trim(); }
+export class HttpBrowserProvider extends BrowserProvider {
+  async open(url) { const {response,url:finalUrl}=await safeFetch(url);
+    if(!response.ok) throw new Error(`HTTP ${response.status} ${finalUrl}`);
+    if(!response.headers.get('content-type')?.includes('text/html')) throw new Error('Unsupported content type: '+response.headers.get('content-type'));
+    const size=Number(response.headers.get('content-length')||0); if(size>5_000_000) throw new Error('HTML size cap exceeded');
+    const html=(await response.text()); if(html.length>5_000_000) throw new Error('HTML size cap exceeded');
+    const title=textFromHtml(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'');
+    return {url:finalUrl,title,text:textFromHtml(html),html};
+  }
+}
+async function launchBrowser(){const {chromium}=await import('playwright');const fallback='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';const local=await fs.access(chromium.executablePath()).then(()=>true,()=>false);const chrome=await fs.access(fallback).then(()=>true,()=>false);if(!local&&!chrome)throw new Error('No Playwright Chromium or system Chrome available');return chromium.launch({headless:true,...(!local&&chrome?{executablePath:fallback}:{})});}
+export class PlaywrightBrowserProvider extends BrowserProvider {
+  async open(url) { await safeUrl(url); const browser=await launchBrowser(); try { const page=await browser.newPage(); await page.goto(url,{waitUntil:'domcontentloaded',timeout:20000}); return {url:page.url(),title:await page.title(),text:await page.locator('body').innerText()}; } finally { await browser.close(); } }
+  async screenshot(url,file,{fullPage=false,viewport={width:1440,height:900},region,elementText,selector}={}) { await safeUrl(url); const browser=await launchBrowser(); try { const page=await browser.newPage({viewport,deviceScaleFactor:2}); await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000}); const title=await page.title();if(/access denied|forbidden/i.test(title))throw new Error('Official page blocked browser capture');let target=null;if(selector)target=page.locator(selector).first();else if(elementText)target=page.getByText(elementText,{exact:false}).first();if(target){if(elementText){const options=await page.getByText(elementText,{exact:false}).all();for(const item of options){if(await item.isVisible()){target=item;break;}}}await target.waitFor({state:'visible',timeout:8000});await target.scrollIntoViewIfNeeded();await page.waitForTimeout(850);if(elementText){let up=target;for(let i=0;i<4;i++){const box=await up.boundingBox();if(box&&box.width>280&&box.height>160&&box.height<1800){target=up;break;}up=up.locator('xpath=..');}}await target.screenshot({path:file,animations:'disabled',timeout:12000});}else await page.screenshot({path:file,fullPage,clip:region,animations:'disabled'});return {url:page.url(),title,timestamp:new Date().toISOString(),viewport,region:region??null,element:elementText??selector??null,local_path:file}; } finally { await browser.close(); } }
+}

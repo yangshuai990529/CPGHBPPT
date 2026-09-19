@@ -1,0 +1,164 @@
+{
+  "version": "0.1.0",
+  "status": "method_reference",
+  "terms": [
+    {
+      "name": "HDR",
+      "aliases": [
+        "High Dynamic Range",
+        "高动态范围"
+      ],
+      "definition": "电视节目制作语境下的高动态范围图像体系；具体信号与显示效果需分别核验。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "PQ",
+        "HLG",
+        "Dolby Vision"
+      ],
+      "presentation_usage": "注明信号格式、设备和观看场景，不只写 HDR 三个字。",
+      "source_url": "https://www.itu.int/rec/R-REC-BT.2100",
+      "last_checked": "2026-09-19"
+    },
+    {
+      "name": "Dolby Vision",
+      "aliases": [
+        "DV",
+        "杜比视界"
+      ],
+      "definition": "HDR 格式名称；具体动态元数据、设备支持范围及当前信号需以官方资料和型号测试核验。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "HDR",
+        "Picture Mode"
+      ],
+      "presentation_usage": "不能将格式支持、当前信号和模式效果混为同一事实。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "VRR",
+      "aliases": [
+        "Variable Refresh Rate",
+        "可变刷新率"
+      ],
+      "definition": "游戏信源与显示设备之间可变刷新时序相关能力，具体兼容性需核验。",
+      "domain": "gaming",
+      "related_terms": [
+        "ALLM",
+        "Game Mode"
+      ],
+      "presentation_usage": "列明输入接口、信源、刷新率范围与实际测试条件。",
+      "source_url": "https://www.hdmi.org/spec2sub/gaming",
+      "last_checked": "2026-09-19"
+    },
+    {
+      "name": "Local Dimming",
+      "aliases": [
+        "局部调光"
+      ],
+      "definition": "背光分区控制的分析维度；分区数不等于实际画质表现。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "Mini LED",
+        "Peak Brightness"
+      ],
+      "presentation_usage": "分开标注规格、测量条件和主观观察。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "MEMC",
+      "aliases": [
+        "Motion Estimation Motion Compensation",
+        "运动补偿"
+      ],
+      "definition": "运动处理的常用简称；具体实现和效果应按信号、模式分别验证。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "Picture Mode",
+        "VRR"
+      ],
+      "presentation_usage": "不要将支持标识当成所有模式生效。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "NPS",
+      "aliases": [
+        "Net Promoter Score",
+        "净推荐值"
+      ],
+      "definition": "用户研究指标名称；需要样本量、时间、地区、问题口径和分组才可解释结果。",
+      "domain": "product-management",
+      "related_terms": [
+        "User Insight"
+      ],
+      "presentation_usage": "附样本和口径，不由单条评论推断整体趋势。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "Picture Mode",
+      "aliases": [
+        "图效",
+        "画质模式"
+      ],
+      "definition": "产品界面的画质选项概念；与信号类型、参数值和真实显示效果分开描述。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "HDR",
+        "Calibration"
+      ],
+      "presentation_usage": "同一问题同时记录信号、当前模式、可选列表和参数。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "AI Picture",
+      "aliases": [
+        "AIPQ",
+        "智能画质"
+      ],
+      "definition": "用于组织智能画质能力的分析标签；不能替代识别、处理、调节或用户控制的逐项证据。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "Picture Mode",
+        "Calibration"
+      ],
+      "presentation_usage": "以模型/市场/信号/模式为界逐项标示证据，勿用单个 ✓ 包含所有能力。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "Mini LED",
+      "aliases": [
+        "迷你LED"
+      ],
+      "definition": "电视背光技术分类的常用名称；具体背光结构、分区与效果依型号和条件核验。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "Local Dimming",
+        "HDR"
+      ],
+      "presentation_usage": "分离分区规格、测量指标和用户感受。",
+      "source_url": null,
+      "last_checked": null
+    },
+    {
+      "name": "Calibration",
+      "aliases": [
+        "校准",
+        "色彩校准"
+      ],
+      "definition": "基于既定目标与测量调整显示表现的过程；完成流程不等于结果已验证。",
+      "domain": "picture-quality",
+      "related_terms": [
+        "Picture Mode",
+        "HDR"
+      ],
+      "presentation_usage": "记录测量目标、信号、模式、参数与前后结果。",
+      "source_url": null,
+      "last_checked": null
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Organization defaults are committed in `organization.yaml`. Copy `user.example.yaml` to `user.yaml` for personal defaults; do not put credentials in config. Project YAML overrides both. Secrets such as `BRAVE_SEARCH_API_KEY` must come from the environment, not a committed file.

@@ -1,0 +1,6 @@
+import fs from 'node:fs/promises';import path from 'node:path';import {fileURLToPath} from 'node:url';import {runResearch} from '../research/index.mjs';import {BraveSearchProvider} from '../research/web/index.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');const args=Object.fromEntries(process.argv.slice(2).filter(x=>x.startsWith('--')).map((x,i,a)=>[x.slice(2),process.argv[process.argv.indexOf(x)+1]]));
+if(!args.brief){console.error('Usage: node engine/bin/research.mjs --brief brief.json [--deck deck.json] [--output output/project]');process.exit(2)}
+const brief=JSON.parse(await fs.readFile(args.brief,'utf8')),deckPlan=args.deck?JSON.parse(await fs.readFile(args.deck,'utf8')):null;
+const out=path.resolve(args.output??path.join(root,'output',brief.project_id??'research-project'));
+try {const dataset=await runResearch({brief,deckPlan,outputDir:out,cacheDir:path.join(root,'cache/research'),search:new BraveSearchProvider()});console.log(JSON.stringify({output:path.join(out,'research'),sources:dataset.sources.length,evidence:dataset.evidence.length,coverage:dataset.coverage.overall,issues:dataset.issues},null,2));}catch(e){console.error('RESEARCH_ERROR:',e.message);process.exitCode=1;}

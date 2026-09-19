@@ -1,0 +1,15 @@
+{
+  "project_id": "proj-ai-picture-overview",
+  "status": "partial",
+  "plan": [
+    {"step": 1, "question": "为什么现在需要讨论 AI Picture", "skills": ["background-analysis", "trend-analysis"], "evidence_needed": ["行业技术变化", "目标市场变化", "公司战略或产品触发"], "output": "Why Now 假设与证据清单"},
+    {"step": 2, "question": "用户在哪些画质场景遇到什么问题", "skills": ["user-insight"], "evidence_needed": ["用户访谈", "设置路径行为数据", "售后与反馈问题", "典型观影场景"], "output": "Behavior-Pain-Need-Motivation 链"},
+    {"step": 3, "question": "竞品如何定义并交付 AI 画质体验", "skills": ["competitor-analysis"], "evidence_needed": ["竞品官方材料", "真实体验或录像", "机型和地区范围", "能力限制"], "output": "统一维度比较与未解决问题"},
+    {"step": 4, "question": "我们的现状与目标之间差什么", "skills": ["gap-analysis"], "evidence_needed": ["当前算法和产品能力", "信源/模式约束", "设置入口与保存规则", "组织和技术依赖"], "output": "Current State 与 Gap"},
+    {"step": 5, "question": "什么机会值得进入产品策略", "skills": ["insight-extraction", "opportunity-analysis", "product-strategy"], "evidence_needed": ["步骤 1-4 的支持性结论"], "output": "Insight-Opportunity-Strategy 链"},
+    {"step": 6, "question": "产品如何定义、分层和验证", "skills": ["product-positioning", "product-architecture", "feature-definition", "roadmap-metrics"], "evidence_needed": ["目标用户", "价值主张", "技术边界", "优先级与资源"], "output": "Definition、Architecture、Roadmap、Metrics"},
+    {"step": 7, "question": "如何形成可评审 Deck", "skills": ["product-storyline", "presentation-storyline", "slide-planner", "layout-selector", "presentation-citation", "ppt-qa"], "evidence_needed": ["前序输出", "Design System Registry"], "output": "Deck Plan、Slide Specs、QA Report"}
+  ],
+  "research_policy": "本次不联网、不补造事实。所有事实需求进入 sources.json 并标记 needed。",
+  "exit_criteria": ["Task Understanding 完整", "Deck Plan 通过结构检查", "12 个 Slide Specs 均可回溯", "所有待验证结论明确标记", "Renderer Gate 正确阻断"]
+}

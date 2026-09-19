@@ -1,0 +1,20 @@
+{
+  "status": "pass_with_expected_blockers",
+  "scope": "Foundation chain only: Task Understanding -> Analysis Plan -> Deck Plan -> Slide Specs",
+  "automated_checks": [
+    {"check":"JSON Schema subset validation","status":"pass"},
+    {"check":"All JSON syntax","status":"pass"},
+    {"check":"38 Skills contain required sections","status":"pass"},
+    {"check":"Deck Plan and Slide Spec IDs/order","status":"pass"},
+    {"check":"Source and Layout references","status":"pass"},
+    {"check":"No ready_for_renderer slide has needed evidence","status":"pass"}
+  ],
+  "findings": [
+    {"finding_id":"qa-001","severity":"blocker","slide_id":null,"rule":"Evidence must support claims before rendering","evidence":"Six planned Source objects remain in status needed; slides s03-s12 depend on them.","required_change":"Complete the approved research plan and update evidence status before rendering.","owner_layer":"source"},
+    {"finding_id":"qa-002","severity":"blocker","slide_id":null,"rule":"First-phase scope excludes PPTX generation","evidence":"request.constraints.generate_pptx is false.","required_change":"Start a later renderer phase only after explicit scope expansion.","owner_layer":"thinking"},
+    {"finding_id":"qa-003","severity":"major","slide_id":"s02","rule":"Executive Summary must be supported by body conclusions","evidence":"The page is a planned summary while body evidence remains needed.","required_change":"Rewrite s02 after research and body slides are approved.","owner_layer":"thinking"},
+    {"finding_id":"qa-004","severity":"major","slide_id":null,"rule":"PowerPoint-native template verification is required","evidence":"The template was inspected through OOXML and LibreOffice; some fonts rendered as missing glyphs and two layouts have no sample slide.","required_change":"Verify fonts, placeholders, and unverified layouts in native PowerPoint before production rendering.","owner_layer":"renderer"}
+  ],
+  "renderer_entry_gate": "blocked_as_expected",
+  "result": "The reasoning chain is structurally runnable. It correctly stops before unsupported product claims or PPTX generation."
+}

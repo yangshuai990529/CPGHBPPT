@@ -1,0 +1,351 @@
+{
+  "generated_at": "2026-09-19T15:58:26.785Z",
+  "scope": "locked Node packages and installed Python renderer dependency closure",
+  "node": [
+    {
+      "name": "@emnapi/runtime",
+      "version": "1.11.3",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@img/colour",
+      "version": "1.1.0",
+      "license": "MIT",
+      "optional": false
+    },
+    {
+      "name": "@img/sharp-darwin-arm64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-darwin-x64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-freebsd-wasm32",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-darwin-arm64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-darwin-x64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-arm",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-arm64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-ppc64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-riscv64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-s390x",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linux-x64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linuxmusl-arm64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-libvips-linuxmusl-x64",
+      "version": "1.3.3",
+      "license": "LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-arm",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-arm64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-ppc64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-riscv64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-s390x",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linux-x64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linuxmusl-arm64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-linuxmusl-x64",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-wasm32",
+      "version": "0.35.4",
+      "license": "Apache-2.0 AND LGPL-3.0-or-later AND MIT",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-webcontainers-wasm32",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-win32-arm64",
+      "version": "0.35.4",
+      "license": "Apache-2.0 AND LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-win32-ia32",
+      "version": "0.35.4",
+      "license": "Apache-2.0 AND LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@img/sharp-win32-x64",
+      "version": "0.35.4",
+      "license": "Apache-2.0 AND LGPL-3.0-or-later",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-android-arm64",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-darwin-arm64",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-darwin-x64",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-arm-gnueabihf",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-arm64-gnu",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-arm64-musl",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-riscv64-gnu",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-x64-gnu",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-linux-x64-musl",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-win32-arm64-msvc",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "@napi-rs/canvas-win32-x64-msvc",
+      "version": "1.0.9",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "detect-libc",
+      "version": "2.1.2",
+      "license": "Apache-2.0",
+      "optional": false
+    },
+    {
+      "name": "fsevents",
+      "version": "2.3.2",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "pdfjs-dist",
+      "version": "6.3.289",
+      "license": "Apache-2.0",
+      "optional": false
+    },
+    {
+      "name": "playwright",
+      "version": "1.62.1",
+      "license": "Apache-2.0",
+      "optional": false
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.62.1",
+      "license": "Apache-2.0",
+      "optional": false
+    },
+    {
+      "name": "semver",
+      "version": "7.8.5",
+      "license": "ISC",
+      "optional": false
+    },
+    {
+      "name": "sharp",
+      "version": "0.35.4",
+      "license": "Apache-2.0",
+      "optional": false
+    },
+    {
+      "name": "tslib",
+      "version": "2.8.1",
+      "license": "0BSD",
+      "optional": true
+    }
+  ],
+  "python": [
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.1",
+      "license": "MIT"
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0",
+      "license": "MIT-CMU"
+    },
+    {
+      "name": "python-pptx",
+      "version": "1.0.2",
+      "license": "MIT"
+    },
+    {
+      "name": "reportlab",
+      "version": "4.4.9",
+      "license": "BSD license (see license.txt for details), Copyright (c) 2000-2025, ReportLab Inc."
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0"
+    },
+    {
+      "name": "xlsxwriter",
+      "version": "3.2.9",
+      "license": "BSD-2-Clause"
+    }
+  ],
+  "system_tools": [
+    {
+      "name": "qlmanage",
+      "license": "macOS system component"
+    },
+    {
+      "name": "pdftoppm",
+      "license": "Poppler/GPL family; system installation, redistribution not performed"
+    },
+    {
+      "name": "soffice",
+      "license": "LibreOffice MPL-2.0/LGPLv3+; optional system installation"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "@oai/artifact-tool",
+      "reason": "legacy evaluation-only provider; proprietary local license; not in package.json or production default"
+    }
+  ]
+}

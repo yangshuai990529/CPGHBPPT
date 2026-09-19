@@ -1,0 +1,8 @@
+{
+  "id": "picture-quality-competitor-analysis",
+  "version": "1.1.0",
+  "enabled": true,
+  "deprecated": false,
+  "domain": "tv-picture-quality",
+  "evaluation_status": "basic_cases_passed"
+}

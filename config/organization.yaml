@@ -1,0 +1,13 @@
+template:
+  id: tcl-product
+presentation:
+  language: zh-CN
+  type: product-overview
+research:
+  enabled: true
+output:
+  pptx: true
+  preview: true
+  sources: true
+runtime:
+  renderer: python-pptx

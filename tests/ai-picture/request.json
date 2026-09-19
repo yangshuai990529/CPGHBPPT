@@ -1,0 +1,18 @@
+{
+  "project_id": "proj-ai-picture-overview",
+  "topic": "AI Picture 产品概要",
+  "purpose": "形成用于内部产品评审的产品概要，明确需要验证的问题、产品机会、初步策略、产品定义、架构、路线图和指标。",
+  "audience": ["产品规划负责人", "画质产品经理", "研发与设计代表"],
+  "decision_needed": "是否批准进入事实研究、用户验证和方案细化阶段。",
+  "available_materials": [
+    {"material_id": "mat-none", "type": "none", "uri": null, "status": "not_applicable", "role": "本次为 Foundation 虚拟主题测试，不使用真实项目材料"}
+  ],
+  "constraints": {
+    "generate_pptx": false,
+    "language": "zh-CN",
+    "max_slides": 12,
+    "research_mode": "none",
+    "template_id": "tcl-product-master-v1"
+  },
+  "unknowns": ["目标市场和机型范围", "目标用户及关键场景", "现有 AI 画质能力", "用户问题证据", "竞品能力与采用情况", "技术和合规边界"]
+}

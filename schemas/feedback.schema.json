@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local Product PPT Feedback",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "feedback_id",
+    "project_id",
+    "slide_id",
+    "feedback_type",
+    "category",
+    "signal_class",
+    "original",
+    "updated",
+    "comment",
+    "timestamp",
+    "status"
+  ],
+  "properties": {
+    "feedback_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "slide_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "feedback_type": {
+      "enum": [
+        "explicit",
+        "title_edit",
+        "layout_change",
+        "slide_deleted",
+        "storyline_change",
+        "other_edit"
+      ]
+    },
+    "category": {
+      "enum": [
+        "content",
+        "storyline",
+        "analysis",
+        "layout",
+        "visual",
+        "data",
+        "source",
+        "tone"
+      ]
+    },
+    "signal_class": {
+      "enum": [
+        "UNCLASSIFIED",
+        "PREFERENCE",
+        "QUALITY_CORRECTION",
+        "BUSINESS_DECISION",
+        "ONE_OFF_CHANGE",
+        "STYLE_CHANGE"
+      ]
+    },
+    "original": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "comment": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "pending_review",
+        "confirmed",
+        "rejected"
+      ]
+    },
+    "suggested_classes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "PREFERENCE",
+          "QUALITY_CORRECTION",
+          "BUSINESS_DECISION",
+          "ONE_OFF_CHANGE",
+          "STYLE_CHANGE"
+        ]
+      }
+    },
+    "classification_note": {
+      "type": "string"
+    }
+  }
+}

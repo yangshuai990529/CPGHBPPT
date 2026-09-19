@@ -1,0 +1,37 @@
+{
+  "id": "ai-tv",
+  "version": "0.1.0",
+  "status": "candidate_method",
+  "match": [
+    "AI TV",
+    "AI Picture",
+    "AI电视",
+    "智能画质",
+    "Agent"
+  ],
+  "knowledge": [
+    "knowledge-base/domains/ai-tv/overview.md"
+  ],
+  "skills": [
+    "ai-picture-analysis",
+    "ai-agent-analysis",
+    "ai-interaction",
+    "ai-memory",
+    "ai-personalization"
+  ],
+  "ontology": "knowledge-base/ontology/tv.json",
+  "glossary": "knowledge-base/glossary/terms.json",
+  "dimension_rules": {
+    "ai-picture": [
+      "Perception",
+      "Understanding",
+      "Adjustment",
+      "Personalization",
+      "Interaction"
+    ]
+  },
+  "qa_rules": [
+    "do_not_equate_voice_assistant_with_agent",
+    "capability_requires_source"
+  ]
+}

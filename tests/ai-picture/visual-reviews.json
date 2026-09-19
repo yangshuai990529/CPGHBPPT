@@ -1,0 +1,122 @@
+[
+  {
+    "content_hash": "68a7a6e07f5c274cd1f47e1d6fc3425a4ffecdaf502a6aaa07a3e107c78ba58d",
+    "entity": "Hisense",
+    "asset_type": "product_image",
+    "description": "Hisense U8 MiniLED television product render showing FIFA artwork",
+    "visual_content": [
+      "television product render"
+    ],
+    "watermark": false,
+    "text_density": "medium",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "4182a36c995e6a6be8f0e120e60ae3c785a51d02f6ddc27b2f8edccc66ef8930",
+    "entity": "Sony",
+    "asset_type": "feature_image",
+    "description": "Sony XR Processor before-after processing illustration",
+    "visual_content": [
+      "official feature illustration"
+    ],
+    "watermark": false,
+    "text_density": "low",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "bdd46927aa1f7730b6c429dd4c452d43d1fbda3aa429b81ade3156bacf8293dc",
+    "entity": "Samsung",
+    "asset_type": "product_image",
+    "description": "2025 Samsung QN900F Neo QLED 8K television front product render",
+    "visual_content": [
+      "television product render"
+    ],
+    "watermark": false,
+    "text_density": "low",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "e372799613fcecdf37796e007d0965b6f54be4f6e1d2210b5c82b39f6e8a92f5",
+    "entity": "Samsung",
+    "asset_type": "feature_screenshot",
+    "description": "Official Samsung 8K AI Upscaling Pro feature section text screenshot",
+    "visual_content": [
+      "official feature section"
+    ],
+    "watermark": false,
+    "text_density": "high",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "d2d041d6d27ead8dfc1dc9b22c8f776cd759891f32d5e4bc420055d805463a23",
+    "entity": "Sony",
+    "asset_type": "product_image",
+    "description": "Sony BRAVIA 8 II television product render",
+    "visual_content": [
+      "television product render"
+    ],
+    "watermark": false,
+    "text_density": "low",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "bbbb18b1bfc0c15700aaffbbb8fd4d577f6ff728e78d2db3f7569400b3352b40",
+    "entity": "Hisense",
+    "asset_type": "feature_screenshot",
+    "description": "Hisense Hi-View AI Engine Pro official webpage feature card",
+    "visual_content": [
+      "official feature section"
+    ],
+    "watermark": false,
+    "text_density": "high",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "b6ade882c52127c98bc5d8841eeb5fecec0c027ef082bff51f9cc43e8228228a",
+    "entity": "Samsung",
+    "asset_type": "feature_image",
+    "description": "Samsung Color Booster Pro before-after official feature illustration with television",
+    "visual_content": [
+      "official feature illustration"
+    ],
+    "watermark": false,
+    "text_density": "low",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  },
+  {
+    "content_hash": "6ca4fbba04d7a16dfec6edba955c7b489bad8133262ac54d3f111e9fd6d313a2",
+    "entity": "Hisense",
+    "asset_type": "feature_image",
+    "description": "Hisense Hi-View AI Engine Pro processor illustration",
+    "visual_content": [
+      "official feature illustration"
+    ],
+    "watermark": false,
+    "text_density": "low",
+    "visual_clarity": "reviewed_at_native_resolution",
+    "reviewer": "agent-visual-inspection",
+    "reviewed_at": "2026-09-19",
+    "note": "Classification based on visually inspected bytes; does not grant copyright reuse rights."
+  }
+]

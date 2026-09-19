@@ -1,0 +1,97 @@
+[
+  {
+    "slide_id":"s01","slide_type":"cover","purpose":"标识主题与内部评审性质。","title":"AI Picture 产品概要","title_mode":"topic","key_message":"AI Picture 产品概要",
+    "content":{"conclusion":"","analysis":[],"implication":"","structured_data":null,"speaker_note":"Foundation 虚拟主题测试，不代表正式产品结论。"},
+    "evidence":[],"visualization":{"type":"none","reason":"封面只需主题和基本信息。","data_requirements":[],"avoid":["加入摘要或功能列表"]},
+    "layout":{"layout_id":"tcl-cover-01","content_density":"low","safe_area_token":"cover_title","reserved_regions":["full-slide cover artwork"]},
+    "assets":[],"sources":[],"notes":["作者和日期在 Renderer 阶段写入 cover_meta"],"status":"draft"
+  },
+  {
+    "slide_id":"s02","slide_type":"executive_summary","purpose":"给出当前阶段的核心判断和决策请求。","title":"当前应先验证机会，再决定 AI Picture 的具体产品方案","title_mode":"conclusion","key_message":"先批准研究与验证框架，再决定具体产品方案",
+    "content":{"conclusion":"AI Picture 目前只有工作定义，用户问题、竞品方向和内部差距仍需证据。","analysis":["下一阶段先补齐三类证据","证据形成 Opportunity 后再确定 Strategy 和 Feature"],"implication":"本次评审的合理输出是研究授权与范围确认，而不是功能定案。","structured_data":{"decision_request":"批准进入事实研究、用户验证和方案细化阶段"},"speaker_note":"该页为计划中的 Executive Summary，最终必须由正文支持。"},
+    "evidence":[{"evidence_id":"ev-s02-01","claim":"关键业务事实尚未取得","evidence_type":"observation","status":"supported","source_ids":[],"note":"由本测试输入材料为空直接支持"}],
+    "visualization":{"type":"text","reason":"该页表达决策请求与少量关键判断，文本层级比图形更直接。","data_requirements":[],"avoid":["卡片网格","引入未验证市场数字"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"low","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":[],"notes":["最终版本需在正文完成后重写"],"status":"draft"
+  },
+  {
+    "slide_id":"s03","slide_type":"content","purpose":"定义 Why Now 的验证框架。","title":"Why Now 需要由行业变化、用户变化和内部触发共同证明","title_mode":"conclusion","key_message":"三类变化缺一时，只能形成较弱的立项理由。",
+    "content":{"conclusion":"AI Picture 的 Why Now 目前是研究假设。","analysis":["行业：技术和厂商交付方式是否发生持续变化","用户：画质场景和调节行为是否改变","内部：平台、业务或能力是否出现明确触发"],"implication":"只有三类信号形成一致方向，才进入机会优先级判断。","structured_data":{"tracks":["industry","user","internal"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s03-01","claim":"行业和技术变化","evidence_type":"fact","status":"needed","source_ids":["src-ai-picture-industry"],"note":null},{"evidence_id":"ev-s03-02","claim":"用户变化","evidence_type":"fact","status":"needed","source_ids":["src-ai-picture-user","src-ai-picture-usage"],"note":null},{"evidence_id":"ev-s03-03","claim":"内部触发","evidence_type":"fact","status":"needed","source_ids":["src-ai-picture-current-state","src-ai-picture-business"],"note":null}],
+    "visualization":{"type":"timeline","reason":"仅在取得有时间顺序的变化证据后，用 Timeline 解释 Why Now。","data_requirements":["每类至少两个时间信号","准确日期或时间段"],"avoid":["用相邻事件暗示因果","在无日期时强行使用"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-industry","src-ai-picture-user","src-ai-picture-usage","src-ai-picture-current-state","src-ai-picture-business"],"notes":["证据不足时保留三轨研究框架，不绘制 Timeline"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s04","slide_type":"journey","purpose":"把用户问题从假设变成研究问题。","title":"用户障碍需要按发现、理解、判断和控制四个阶段验证","title_mode":"conclusion","key_message":"不同障碍对应不同产品机会，不能统一归因为用户不会调参数。",
+    "content":{"conclusion":"用户问题尚未确认。","analysis":["发现：入口和触发是否可见","理解：术语和建议是否可理解","判断：能否感知变化和收益","控制：能否预览、撤回和保存"],"implication":"研究需要覆盖完整任务链，而不是只问用户是否喜欢 AI。","structured_data":{"stages":["发现","理解","判断","控制"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s04-01","claim":"用户阶段与痛点","evidence_type":"observation","status":"needed","source_ids":["src-ai-picture-user","src-ai-picture-usage"],"note":null}],
+    "visualization":{"type":"journey-map","reason":"需要跨阶段展示行为、触点、痛点和机会。","data_requirements":["分阶段用户行为","痛点证据","触点"],"avoid":["凭空绘制情绪曲线"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-user","src-ai-picture-usage"],"notes":["当前阶段名称是研究框架，不是事实结论"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s05","slide_type":"comparison","purpose":"识别竞品方向和未解决问题。","title":"竞品研究应比较体验逻辑，而非只统计是否具有 AI 功能","title_mode":"conclusion","key_message":"统一维度应覆盖定位、场景、自动化、可解释性和用户控制权。",
+    "content":{"conclusion":"竞品范围和结果尚未取得。","analysis":["定位与目标用户","入口和触发场景","感知与推荐能力","解释、预览、撤回和保存"],"implication":"只有可比证据才能识别共同方向和未解决问题。","structured_data":{"dimensions":["定位","场景","自动化","可解释性","控制权"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s05-01","claim":"竞品能力与交互","evidence_type":"observation","status":"needed","source_ids":["src-ai-picture-competitor"],"note":null}],
+    "visualization":{"type":"comparison-matrix","reason":"多个可比竞品需要在统一维度下核对差异。","data_requirements":["至少三个可比对象","统一评分或事实规则"],"avoid":["主观勾叉","不同机型版本混用"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"high","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[{"asset_id":"asset-competitor-evidence","asset_type":"screenshot","status":"needed","uri":null,"usage":"支撑关键交互差异；不在同页堆叠所有截图"}],"sources":["src-ai-picture-competitor"],"notes":["完整矩阵过密时移入附录"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s06","slide_type":"content","purpose":"建立本方 Current State 和差距。","title":"Gap 需要同时覆盖算法、交互、规则和工程依赖","title_mode":"conclusion","key_message":"单看算法效果无法定义完整的 AI Picture 产品差距。",
+    "content":{"conclusion":"内部能力和目标状态尚未盘点。","analysis":["算法：感知、推荐和参数映射","交互：入口、解释、预览和撤回","规则：信源、图效、保存与跨场景","工程：端云、数据、性能和责任团队"],"implication":"Gap 评审必须由跨团队共同确认。","structured_data":{"gap_dimensions":["algorithm","interaction","rules","engineering"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s06-01","claim":"当前能力和约束","evidence_type":"fact","status":"needed","source_ids":["src-ai-picture-current-state"],"note":null}],
+    "visualization":{"type":"feature-table","reason":"首轮盘点需要逐维记录 Current、Target、Gap 和 Owner。","data_requirements":["统一维度","目标基准","Owner"],"avoid":["把未知写成不支持"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"high","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-current-state"],"notes":["高密度表格应限制行数，完整盘点另附"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s07","slide_type":"content","purpose":"把用户、竞品和现状证据收敛为 Opportunity。","title":"产品机会应聚焦降低用户获得、理解和控制合适观感的成本","title_mode":"conclusion","key_message":"该机会是待验证假设，必须由三类证据共同支持。",
+    "content":{"conclusion":"候选机会：降低用户从观感目标到可控画质结果的认知和操作成本。","analysis":["用户证据回答问题是否真实","竞品证据回答现有方案是否仍有空白","Current State 回答本方差距和可行性"],"implication":"证据成立后再进入 Strategy，不直接落 Feature。","structured_data":{"upstream_slides":["s04","s05","s06"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s07-01","claim":"候选机会成立","evidence_type":"hypothesis","status":"needed","source_ids":["src-ai-picture-user","src-ai-picture-usage","src-ai-picture-competitor","src-ai-picture-current-state"],"note":"需要三类证据交叉验证"}],
+    "visualization":{"type":"pyramid","reason":"只有在证据能形成从事实到机会的稳定递进时使用。","data_requirements":["三类支持性结论"],"avoid":["用面积暗示机会规模","把并列证据伪装成层级"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-user","src-ai-picture-usage","src-ai-picture-competitor","src-ai-picture-current-state"],"notes":["若证据只是并列，改用文本或三路汇聚结构"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s08","slide_type":"content","purpose":"提出可讨论的策略选择和边界。","title":"初步策略假设是形成从理解场景到可控应用的闭环","title_mode":"conclusion","key_message":"产品价值来自理解、推荐和控制的连续体验，而非单个 AI 开关。",
+    "content":{"conclusion":"候选策略由三个能力方向组成。","analysis":["理解：识别场景、内容或偏好","推荐：把主观目标映射为可解释建议","控制：支持预览、应用、撤回和保存"],"implication":"策略成立后再定义具体 Feature 和首期范围。","structured_data":{"goal":"降低获得合适观感的成本","pillars":["理解","推荐","控制"],"foundation":["画质算法","参数映射","状态与数据基础"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s08-01","claim":"三个策略方向能承接优先机会","evidence_type":"hypothesis","status":"needed","source_ids":["src-ai-picture-user","src-ai-picture-current-state","src-ai-picture-business"],"note":null}],
+    "visualization":{"type":"strategy-house","reason":"候选结构具备一个目标、三个支柱和共同基础，但需在策略确认后使用。","data_requirements":["目标","支柱与 Opportunity 映射","共同基础"],"avoid":["把功能列表当支柱"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-user","src-ai-picture-current-state","src-ai-picture-business"],"notes":["当前内容是 Strategy Hypothesis"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s09","slide_type":"content","purpose":"明确产品定义和边界。","title":"产品定义必须固定目标用户、核心场景、价值主张和首期边界","title_mode":"conclusion","key_message":"没有范围的 AI Picture 会迅速退化为功能集合。",
+    "content":{"conclusion":"工作定义尚未达到正式产品定义。","analysis":["For whom：目标用户待验证","When：核心观影和调节场景待选择","Value：降低获得合适观感的成本","Boundary：首期信源、模式、保存和跨端范围待确认"],"implication":"正式定义依赖业务范围和用户研究。","structured_data":{"working_definition":"利用场景理解和画质能力，为目标用户提供可解释、可预览、可撤回的画质建议与应用"},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s09-01","claim":"目标用户与场景","evidence_type":"hypothesis","status":"needed","source_ids":["src-ai-picture-user","src-ai-picture-business"],"note":null}],
+    "visualization":{"type":"text","reason":"产品定义需要精确措辞和边界，文本比装饰图更清楚。","data_requirements":[],"avoid":["营销口号","面向所有用户"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"low","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-user","src-ai-picture-business"],"notes":["用户、市场和机型确认后重写"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s10","slide_type":"architecture","purpose":"解释价值如何由场景、能力、应用和基础支撑。","title":"AI Picture 架构从用户价值向下连接场景、能力、应用和算法基础","title_mode":"conclusion","key_message":"各层必须保持对象类型一致并能上下回溯。",
+    "content":{"conclusion":"候选架构用于组织问题，不代表技术方案定案。","analysis":["用户价值：更低成本获得合适观感","场景：内容、环境、偏好与设备状态","能力：理解、推荐、预览、应用和学习","基础：画质算法、参数映射、状态、数据与端云能力"],"implication":"技术和应用团队需共同确认分层和接口。","structured_data":{"layers":["User Value","Scenario","Capability","Application","Platform and Technology Foundation"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s10-01","claim":"能力和基础依赖","evidence_type":"hypothesis","status":"needed","source_ids":["src-ai-picture-current-state"],"note":null}],
+    "visualization":{"type":"architecture","reason":"内容存在明确层级和依赖关系。","data_requirements":["层内模块","层间接口","外部依赖"],"avoid":["所有模块互连","把 Roadmap 放入架构"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-current-state"],"notes":["Renderer 只画批准后的层级，不得补技术模块"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s11","slide_type":"roadmap","purpose":"定义从验证到扩展的推进顺序。","title":"Roadmap 应先验证价值和可控性，再扩展场景、信源和生态能力","title_mode":"conclusion","key_message":"阶段顺序由最大风险和能力依赖决定，不由功能数量决定。",
+    "content":{"conclusion":"当前只能给出相对阶段，不能承诺日期。","analysis":["Phase 1：验证用户问题、推荐可理解性和可撤回应用","Phase 2：扩展场景、信源、保存与个性化","Phase 3：在价值成立后评估分享、跨端或生态能力"],"implication":"资源和目标机型确认后才能形成日期版计划。","structured_data":{"time_mode":"relative","phases":["validate","expand","ecosystem"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s11-01","claim":"阶段目标和依赖","evidence_type":"hypothesis","status":"needed","source_ids":["src-ai-picture-current-state","src-ai-picture-business"],"note":null}],
+    "visualization":{"type":"roadmap","reason":"需要表达阶段目标、能力演进和依赖。","data_requirements":["阶段目标","依赖","退出条件","时间确定性"],"avoid":["虚构精确日期","把全部功能放首期"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-current-state","src-ai-picture-business"],"notes":["保持 Now/Next/Future 或 Phase 1-3 的相对表达"],"status":"needs_evidence"
+  },
+  {
+    "slide_id":"s12","slide_type":"metrics","purpose":"定义 AI Picture 的价值如何被衡量。","title":"指标需同时覆盖用户获得价值、产品使用质量和业务结果","title_mode":"conclusion","key_message":"没有基线时先定义测量方法，不填虚构目标值。",
+    "content":{"conclusion":"候选指标树需要业务目标和埋点能力确认。","analysis":["User：完成目标观感的成功率、理解度和控制感","Product：触达、完成、应用、撤回和持续使用","Business：目标机型价值、满意度或服务成本，按真实目标选择"],"implication":"首期 Roadmap 应包含基线建立和埋点设计。","structured_data":{"metric_groups":["user","product","business"]},"speaker_note":null},
+    "evidence":[{"evidence_id":"ev-s12-01","claim":"现有基线与业务目标","evidence_type":"fact","status":"needed","source_ids":["src-ai-picture-usage","src-ai-picture-business"],"note":null}],
+    "visualization":{"type":"architecture","reason":"指标树需要显示从业务目标到产品行为和用户价值的层级关系。","data_requirements":["指标定义","口径","基线","观察周期"],"avoid":["用大数字展示不存在的目标"]},
+    "layout":{"layout_id":"tcl-content-bird-01","content_density":"medium","safe_area_token":"content_standard","reserved_regions":["content_top_right_logo","content_confidentiality","content_bird_art","content_page_number"]},
+    "assets":[],"sources":["src-ai-picture-usage","src-ai-picture-business"],"notes":["可视化 type 使用 architecture 表达指标层级，不代表产品架构"],"status":"needs_evidence"
+  }
+]

@@ -1,0 +1,7 @@
+status: candidate
+scope: product-team
+preferred_density: medium
+preferred_storyline: conclusion-first
+preferred_chart: evidence-appropriate
+default_language: zh-CN
+constraint: never override brand evidence source or QA hard rules

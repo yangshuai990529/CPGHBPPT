@@ -1,0 +1,81 @@
+{
+  "registry_version": "1.0.0",
+  "masters": [
+    {
+      "master_id": "tcl-product-master-v1",
+      "name": "产品PPT模板",
+      "source_uri": "../../PPT设计规范/产品PPT模板.pptx",
+      "source_sha256": "72fac184e5a456b9423a7af8084b8d1467d5c27c3e913f682d9b11be47afa528",
+      "source_size_bytes": 4375119,
+      "scan_date": "2026-09-19",
+      "slide_size": {"width_in": 13.333333, "height_in": 7.5, "aspect_ratio": "16:9"},
+      "ooxml_inventory": {"slides": 5, "slide_masters": 1, "slide_layouts": 6, "themes": 2, "media_files": 8},
+      "layout_ids": ["tcl-cover-01", "tcl-section-01", "tcl-content-bird-01", "tcl-content-clean-01", "tcl-ending-01", "tcl-title-content-minimal-01"],
+      "page_masters": [
+        {
+          "id": "COVER",
+          "type": "cover",
+          "corporate_layout_id": "tcl-cover-01",
+          "background": "template_layout_artwork",
+          "fixed_elements": ["cover background", "TCL/Olympic lockup", "right-side building artwork"],
+          "editable_elements": ["cover title", "department", "date", "author"],
+          "title_area": {"x": 42.7, "y": 322.9, "w": 613.6, "h": 145.3, "unit": "px"},
+          "content_safe_area": null,
+          "logo_area": {"x": 0, "y": 0, "w": 540, "h": 285, "unit": "px", "status": "embedded_in_background"},
+          "page_number_area": null
+        },
+        {
+          "id": "SECTION",
+          "type": "section",
+          "corporate_layout_id": "tcl-section-01",
+          "background": "template_layout_artwork",
+          "fixed_elements": ["top-left brand mark", "top-right logo", "confidentiality label", "bird artwork", "page number"],
+          "editable_elements": ["section title"],
+          "title_area": {"x": 496.4, "y": 332.6, "w": 356.2, "h": 54.8, "unit": "px"},
+          "content_safe_area": null,
+          "logo_area": {"x": 1037.2, "y": 22.0, "w": 224.7, "h": 75.4, "unit": "px"},
+          "page_number_area": {"x": 941.5, "y": 667.3, "w": 288, "h": 38.3, "unit": "px"}
+        },
+        {
+          "id": "CONTENT",
+          "type": "content",
+          "corporate_layout_id": "tcl-content-bird-01",
+          "background": "template_layout_artwork",
+          "fixed_elements": ["top-left brand mark", "title underline", "top-right logo", "confidentiality label", "bird artwork", "page number"],
+          "editable_elements": ["page title", "content layout", "source"],
+          "title_area": {"x": 128, "y": 28, "w": 760, "h": 42, "unit": "px"},
+          "content_safe_area": {"x": 120, "y": 124, "w": 952, "h": 500, "unit": "px"},
+          "source_area": {"x": 120, "y": 637, "w": 780, "h": 25, "unit": "px"},
+          "logo_area": {"x": 1037.2, "y": 22.0, "w": 224.7, "h": 75.4, "unit": "px"},
+          "page_number_area": {"x": 941.5, "y": 667.3, "w": 288, "h": 38.3, "unit": "px"}
+        },
+        {
+          "id": "ENDING",
+          "type": "ending",
+          "corporate_layout_id": "tcl-ending-01",
+          "background": "template_layout_artwork",
+          "fixed_elements": ["T mark", "THANK YOU", "brand statement", "website"],
+          "editable_elements": [],
+          "title_area": null,
+          "content_safe_area": null,
+          "logo_area": null,
+          "page_number_area": null
+        }
+      ],
+      "hard_constraints": [
+        "Do not modify or overwrite the source PPTX",
+        "Do not cover, crop, stretch, recolor or rebuild official logo artwork",
+        "Do not cover confidentiality labels or page-number areas",
+        "Keep authored content inside the declared safe area and outside reserved regions",
+        "Do not treat Office theme accent colors as approved brand colors",
+        "Do not use an unverified layout for final delivery without visual review"
+      ],
+      "verification": {
+        "structure": "verified_from_ooxml",
+        "visual": "verified_from_libreoffice_render",
+        "powerpoint_native": "not_verified",
+        "fonts": "partially_verified"
+      }
+    }
+  ]
+}

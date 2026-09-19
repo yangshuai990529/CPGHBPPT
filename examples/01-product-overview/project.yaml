@@ -1,0 +1,29 @@
+project:
+  name: AI Picture 产品概要
+presentation:
+  type: product-overview
+  audience: 产品评审
+  language: zh-CN
+  brief: 比较 Samsung Sony Hisense 的 AI Picture 产品能力
+research:
+  enabled: true
+  competitors:
+    - Samsung
+    - Sony
+    - Hisense
+  source_mode: public
+reasoning:
+  enabled: true
+  mode: normal
+template:
+  id: tcl-product
+output:
+  pptx: true
+  preview: true
+  sources: true
+runtime:
+  offline: false
+approval:
+  research_plan: false
+  storyline: false
+  final_preview: false

@@ -1,0 +1,24 @@
+project:
+  name: NPS 用户洞察示例
+presentation:
+  type: user-insight
+  audience: 产品规划讨论
+  language: zh-CN
+  brief: 基于本地 NPS.pdf 提取可追溯内容
+research:
+  enabled: false
+  competitors: []
+  source_mode: provided-only
+reasoning:
+  enabled: true
+  mode: normal
+template:
+  id: tcl-product
+output:
+  pptx: true
+  preview: true
+  sources: true
+runtime:
+  offline: true
+input_files:
+  - input/NPS.pdf

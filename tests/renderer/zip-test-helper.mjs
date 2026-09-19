@@ -1,0 +1,2 @@
+import {spawn} from 'node:child_process';
+export function ZipFile(file){return new Promise((resolve,reject)=>{const code='import sys,json,hashlib,zipfile;z=zipfile.ZipFile(sys.argv[1]);print(json.dumps({n:hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist()}))';const c=spawn('python3',['-c',code,file],{stdio:['ignore','pipe','pipe']});let out='';c.stdout.on('data',x=>out+=x);c.stderr.on('data',x=>out+=x);c.on('close',n=>n===0?resolve(JSON.parse(out)):reject(new Error(out)));c.on('error',reject);});}

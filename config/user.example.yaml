@@ -1,0 +1,5 @@
+presentation:
+  language: zh-CN
+  type: product-overview
+output:
+  preview: true

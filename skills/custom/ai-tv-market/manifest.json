@@ -1,0 +1,8 @@
+{
+  "id": "ai-tv-market",
+  "version": "1.0.0",
+  "enabled": false,
+  "deprecated": false,
+  "domain": "ai-tv",
+  "evaluation_status": "not_yet_evaluated"
+}

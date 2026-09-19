@@ -1,0 +1,123 @@
+{
+  "project_id": "AI-Picture-Research",
+  "topic": "AI Picture product overview",
+  "objective": "Compare Samsung, Sony and Hisense official picture capabilities",
+  "brands": [
+    "Samsung",
+    "Sony",
+    "Hisense"
+  ],
+  "max_sources": 8,
+  "max_requests": 12,
+  "max_no_new": 3,
+  "sources": [
+    {
+      "brand": "Samsung",
+      "product": "2025 8K Neo QLED AI TV (US page)",
+      "url": "https://www.samsung.com/us/tvs/8k-tv/highlights1/",
+      "probes": [
+        {
+          "brand": "Samsung",
+          "capability": "AI Picture",
+          "statement": "Samsung's 2025 US 8K Neo QLED page describes AI picture features.",
+          "needle": "Samsung Vision AI auto-adjusts the color and contrast of each scene based on your preferences"
+        },
+        {
+          "brand": "Samsung",
+          "capability": "AI Processing",
+          "statement": "Samsung describes processor-based 8K AI upscaling on its US page.",
+          "needle": "8K AI Upscaling Pro Watch your favorite movies and shows in a higher picture quality"
+        },
+        {
+          "brand": "Samsung",
+          "capability": "Auto Picture Adjustment",
+          "statement": "Samsung says AI Customization Mode adjusts scene color and contrast.",
+          "needle": "Samsung Vision AI auto-adjusts the color and contrast of each scene"
+        },
+        {
+          "brand": "Samsung",
+          "capability": "User Preference / Personalization",
+          "statement": "Samsung AI Customization Mode uses preferences for entertainment genres.",
+          "needle": "based on your preferences for movies, sports and other types of entertainment"
+        },
+        {
+          "brand": "Samsung",
+          "capability": "Content Recognition",
+          "statement": "Samsung describes AI enhancement of color expression by scene.",
+          "needle": "Color Booster Pro uses AI to dynamically enhance the color expression of each scene"
+        }
+      ]
+    },
+    {
+      "brand": "Sony",
+      "product": "XR Processor BRAVIA overview (US page)",
+      "url": "https://electronics.sony.com/bravia-xr",
+      "probes": [
+        {
+          "brand": "Sony",
+          "capability": "AI Picture",
+          "statement": "Sony describes XR Processor AI picture optimization.",
+          "needle": "AI scene recognition system that detects and analyzes data"
+        },
+        {
+          "brand": "Sony",
+          "capability": "Scene Detection",
+          "statement": "Sony describes AI scene recognition in the XR Processor.",
+          "needle": "AI scene recognition system that detects and analyzes data"
+        },
+        {
+          "brand": "Sony",
+          "capability": "AI Processing",
+          "statement": "Sony describes XR Processor picture optimization.",
+          "needle": "then optimizes the picture for ultimate realism"
+        },
+        {
+          "brand": "Sony",
+          "capability": "Auto Picture Adjustment",
+          "statement": "Sony describes automatic picture optimization via its processor.",
+          "needle": "then optimizes the picture for ultimate realism"
+        }
+      ]
+    },
+    {
+      "brand": "Hisense",
+      "product": "65U8QG US page",
+      "url": "https://www.hisense-usa.com/product-page/televisions-65-class-u8-series-miniled-uled-4k-google-tv-65u8qg",
+      "probes": [
+        {
+          "brand": "Hisense",
+          "capability": "AI Picture",
+          "statement": "Hisense's 65U8QG page describes AI picture optimization.",
+          "needle": "automatically optimizes the picture and sound based on the content you are watching"
+        },
+        {
+          "brand": "Hisense",
+          "capability": "AI Processing",
+          "statement": "Hisense names Hi-View AI Engine Pro as its picture engine.",
+          "needle": "Hi-View AI Engine Pro"
+        },
+        {
+          "brand": "Hisense",
+          "capability": "Auto Picture Adjustment",
+          "statement": "Hisense says the engine automatically optimizes picture and sound.",
+          "needle": "automatically optimizes the picture and sound based on the content you are watching"
+        },
+        {
+          "brand": "Hisense",
+          "capability": "Content Recognition",
+          "statement": "Hisense says its engine adjusts according to watched content.",
+          "needle": "This intelligent feature detects, analyzes and adjusts the details, depth and appearance"
+        }
+      ]
+    }
+  ],
+  "asset_targets": [
+    {
+      "brand": "Samsung",
+      "product": "2025 8K Neo QLED AI TV",
+      "page_url": "https://www.samsung.com/us/tvs/8k-tv/highlights1/",
+      "url": "https://images.samsung.com/is/image/samsung/assets/global/hq/vd/tvs/8k-tv/highlights/why-samsung-8k-tv/us_uk_fr_de_it_es_kr/2025-8k-neo-qled-tv-f03-why-samsung-8k-tv-start-image-pc.jpg",
+      "usage": "research visual candidate, do not reuse without rights review"
+    }
+  ]
+}

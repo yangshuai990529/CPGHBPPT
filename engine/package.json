@@ -1,0 +1,10 @@
+{
+  "name": "product-ppt-agent-renderer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:mock": "node bin/build-python.mjs --deck ../examples/render-test/deck-plan.json --slides ../examples/render-test/slide-specs.json --template ../templates/tcl-product/master.pptx --output ../output/AI-Picture",
+    "validate": "node bin/validate-config.mjs",
+    "research:ai-picture": "node bin/research-to-ppt.mjs"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local Department Knowledge Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "statement",
+    "domain",
+    "scope",
+    "status",
+    "confidence",
+    "source",
+    "last_updated",
+    "tags"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^kb-[a-z0-9-]+$"
+    },
+    "kind": {
+      "enum": [
+        "method",
+        "term",
+        "historical_decision",
+        "historical_project",
+        "pattern",
+        "validated_insight"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "reviewed",
+        "approved",
+        "rejected",
+        "deprecated"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "type",
+        "locator",
+        "sha256"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "user_provided",
+            "validated_project",
+            "official",
+            "internal_approved"
+          ]
+        },
+        "locator": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "valid_until": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewed_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "use_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "accepted_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rejected_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "structure": {
+      "type": "object"
+    }
+  }
+}

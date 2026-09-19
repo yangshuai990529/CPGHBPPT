@@ -1,0 +1,66 @@
+{
+  "id": "tv-picture-quality",
+  "version": "0.1.0",
+  "status": "candidate_method",
+  "match": [
+    "TV",
+    "电视",
+    "Picture",
+    "画质",
+    "HDR",
+    "Mini LED",
+    "Calibration",
+    "校准"
+  ],
+  "knowledge": [
+    "knowledge-base/domains/picture-quality/overview.md",
+    "knowledge-base/domains/picture-quality/competitor-dimensions.md",
+    "knowledge-base/domains/picture-quality/common-user-pain-points.md"
+  ],
+  "skills": [
+    "picture-quality-competitor-analysis",
+    "ai-picture-analysis",
+    "hdr-analysis",
+    "mini-led-analysis",
+    "calibration-analysis",
+    "picture-mode-analysis"
+  ],
+  "ontology": "knowledge-base/ontology/tv.json",
+  "glossary": "knowledge-base/glossary/terms.json",
+  "dimension_rules": {
+    "ai-picture": [
+      "AI Processing",
+      "Scene Detection",
+      "Auto Picture Adjustment",
+      "Ambient Environment Adaptation",
+      "User Preference / Personalization",
+      "Core User Interaction"
+    ],
+    "mini-led": [
+      "Backlight",
+      "Local Dimming",
+      "Peak Brightness",
+      "HDR",
+      "Motion"
+    ],
+    "calibration": [
+      "Signal Type",
+      "Picture Mode",
+      "Target",
+      "Parameters",
+      "Result Validation"
+    ],
+    "lcd": [
+      "Picture Mode",
+      "HDR Format",
+      "Motion",
+      "Upscaling",
+      "User Control"
+    ]
+  },
+  "qa_rules": [
+    "model_market_scope",
+    "signal_mode_separation",
+    "unknown_is_not_false"
+  ]
+}

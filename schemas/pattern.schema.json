@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-ppt-agent.local/schemas/pattern.schema.json",
+  "title": "Product PPT Pattern",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["pattern_id", "name", "pattern_type", "problem", "structure", "when_to_use", "when_not_to_use", "quality_checks", "evidence", "maturity"],
+  "properties": {
+    "pattern_id": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+    "name": {"type": "string"},
+    "pattern_type": {"enum": ["storyline", "slide", "visualization", "reasoning"]},
+    "problem": {"type": "string"},
+    "structure": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+    "when_to_use": {"type": "array", "items": {"type": "string"}},
+    "when_not_to_use": {"type": "array", "items": {"type": "string"}},
+    "quality_checks": {"type": "array", "items": {"type": "string"}},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "pages", "observation"],
+        "properties": {
+          "source": {"type": "string"},
+          "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+          "observation": {"type": "string"}
+        }
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "maturity": {"enum": ["candidate", "reviewed", "approved", "deprecated"]},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+  }
+}

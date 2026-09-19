@@ -1,0 +1,16 @@
+{
+  "pattern_id": "EVIDENCE_TO_CONCLUSION",
+  "name": "Evidence to Conclusion",
+  "pattern_type": "slide",
+  "problem": "在一页中让读者先获得结论，再检查证据和产品含义。",
+  "structure": ["Conclusion Title", "Evidence", "Analysis", "Implication"],
+  "when_to_use": ["页面承担一个分析结论", "证据可在一页内被读者核查"],
+  "when_not_to_use": ["章节页或目录页", "需要展开多个独立结论", "证据尚未取得"],
+  "quality_checks": ["标题不超出证据", "证据和分析视觉上可区分", "Implication 不重复标题", "只保留一个核心结论"],
+  "evidence": [
+    {"source": "../../../../旧PPT库/2025年法国TCL电视产品NPS调研报告-终版.pdf", "pages": [11, 17, 20, 30, 42, 55, 59, 61, 62], "observation": "多页使用数据或分模块发现后形成小结和提升方向。"}
+  ],
+  "limitations": ["旧稿标题并非全部结论化，本 Pattern 是对信息组织的规范化提升"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

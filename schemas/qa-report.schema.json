@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-ppt-agent.local/schemas/qa-report.schema.json",
+  "title": "Product PPT Rendering QA Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["deck_id", "status", "score", "slides", "summary"],
+  "properties": {
+    "deck_id": {"type": "string"},
+    "status": {"enum": ["pass", "pass_with_warnings", "fail"]},
+    "score": {"type": "number", "minimum": 0},
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slide_id", "score", "issues"],
+        "properties": {
+          "slide_id": {"type": "string"},
+          "score": {"type": "number", "minimum": 0},
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "severity", "element", "message", "repair_strategy"],
+              "properties": {
+                "type": {"enum": ["TEXT_OVERFLOW", "SHAPE_OVERFLOW", "SAFE_AREA_VIOLATION", "LOGO_COLLISION", "PAGE_NUMBER_COLLISION", "ELEMENT_OVERLAP", "IMAGE_DISTORTION", "FONT_TOO_SMALL", "CONTENT_DENSITY", "EMPTY_SLIDE", "EXCESSIVE_BLANK_SPACE", "MISSING_SOURCE"]},
+                "severity": {"enum": ["low", "medium", "high", "blocker"]},
+                "element": {"type": ["string", "null"]},
+                "message": {"type": "string"},
+                "repair_strategy": {"type": ["string", "null"]}
+              }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["issue_count", "repaired_count", "remaining_count"],
+      "properties": {
+        "issue_count": {"type": "integer", "minimum": 0},
+        "repaired_count": {"type": "integer", "minimum": 0},
+        "remaining_count": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Department PPT Quality Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "generated_at",
+    "dimensions",
+    "issues",
+    "assessed",
+    "not_assessed"
+  ],
+  "properties": {
+    "subject": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dimensions": {
+      "type": "object"
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "blocker",
+              "warning",
+              "info"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "slide": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "suggestion": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "assessed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "not_assessed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "max_repair_cycles": {
+      "type": "integer",
+      "maximum": 3
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

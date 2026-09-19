@@ -1,0 +1,43 @@
+# Local and potentially sensitive workspaces; never publish by default
+/workspace/
+/projects/
+/output/
+/cache/
+/feedback/reviews/
+/input/*
+!/input/README.md
+knowledge-base/candidates/
+knowledge-base/decisions/*.json
+knowledge-base/projects/*.json
+knowledge-base/patterns/*.json
+knowledge-base/best-practices/*.json
+knowledge-base/knowledge-health-report.json
+skills/registry.json
+# Runtime copy of the included design template
+templates/*/master.pptx
+# Runtime/build artifacts
+/node_modules
+/.venv/
+/.chart-data-*/
+__pycache__/
+*.py[cod]
+*.inspect.ndjson
+*.validation.json
+*.log
+.DS_Store
+.env
+.env.*
+**/auth.json
+# Environment-specific golden render and generated evaluation
+/tests/golden/preview-baseline/*.png
+/tests/phase5/ab-report.json
+
+# Local audit snapshots and machine-specific project records
+/docs/clean-clone-verification.md
+/docs/final-audit.md
+/docs/v1-completion-plan.md
+/docs/v1-current-status.md
+/docs/workspace-scan.md
+/tests/phase5/ab-eval.mjs
+/tests/phase5/edited-slide-specs.json
+/tests/phase5/test-results.md

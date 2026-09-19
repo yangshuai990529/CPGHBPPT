@@ -1,0 +1,30 @@
+{
+  "deck_id": "deck-ai-picture-overview",
+  "deck_title": "AI Picture 产品概要",
+  "objective": "让评审者确认 AI Picture 的研究框架、待验证机会、初步产品逻辑和下一阶段工作。",
+  "audience": ["产品规划负责人", "画质产品经理", "研发与设计代表"],
+  "core_message": "AI Picture 当前应被视为一个待验证的产品机会：先证明用户问题和现状差距，再选择从理解、推荐到可控应用的能力路径。",
+  "storyline": [
+    {"section_id":"sec-1","role":"context","question":"为什么现在讨论 AI Picture","answer":"先验证行业、用户和内部触发是否共同形成 Why Now。","depends_on":[]},
+    {"section_id":"sec-2","role":"diagnosis","question":"真正的问题和差距是什么","answer":"通过用户、竞品和 Current State 三类证据形成 Gap。","depends_on":["sec-1"]},
+    {"section_id":"sec-3","role":"bridge","question":"什么机会值得解决","answer":"把证据收敛为可验证的 Opportunity，而非复制竞品功能。","depends_on":["sec-2"]},
+    {"section_id":"sec-4","role":"choice","question":"产品应选择什么方向","answer":"提出初步 Strategy、Positioning 和 Product Definition，并显式保留假设。","depends_on":["sec-3"]},
+    {"section_id":"sec-5","role":"execution","question":"如何落到能力建设和验证","answer":"用 Architecture、Roadmap 和 Metrics 定义后续阶段。","depends_on":["sec-4"]}
+  ],
+  "slides": [
+    {"slide_id":"s01","sequence":1,"section_id":"sec-1","purpose":"标识主题与评审性质。","question":"本次讨论什么","key_message":"AI Picture 产品概要","evidence_needed":[],"analysis_method":"Topic framing","visualization_candidate":"none","dependencies":[]},
+    {"slide_id":"s02","sequence":2,"section_id":"sec-1","purpose":"给出当前阶段的核心判断和决策请求。","question":"本次希望评审者确认什么","key_message":"先批准研究与验证框架，再决定具体产品方案","evidence_needed":["现有材料范围和关键未知项"],"analysis_method":"Executive summary from planned storyline","visualization_candidate":"text","dependencies":["s03","s04","s05","s06","s07","s08"]},
+    {"slide_id":"s03","sequence":3,"section_id":"sec-1","purpose":"定义 Why Now 的验证框架。","question":"哪些变化会让 AI Picture 成为现在的产品议题","key_message":"Why Now 需要由行业变化、用户变化和内部触发共同证明","evidence_needed":["行业技术变化","目标用户行为变化","业务/平台触发"],"analysis_method":"Trend-Change-Problem-Opportunity","visualization_candidate":"timeline","dependencies":[]},
+    {"slide_id":"s04","sequence":4,"section_id":"sec-2","purpose":"把用户问题从假设变成研究问题。","question":"用户获得合适观感的主要障碍是什么","key_message":"需要区分入口不可见、术语难懂、效果不可判断和结果不可控等不同障碍","evidence_needed":["用户访谈","设置行为漏斗","售后反馈"],"analysis_method":"Behavior-Pain-Need-Motivation","visualization_candidate":"journey-map","dependencies":["s03"]},
+    {"slide_id":"s05","sequence":5,"section_id":"sec-2","purpose":"识别竞品方向和仍未解决的问题。","question":"竞品如何交付 AI 画质体验","key_message":"竞品研究应比较定位、场景、自动化、可解释性和用户控制权","evidence_needed":["至少三家可比竞品实测"],"analysis_method":"Comparable-dimension competitor analysis","visualization_candidate":"comparison-matrix","dependencies":["s03"]},
+    {"slide_id":"s06","sequence":6,"section_id":"sec-2","purpose":"建立本方 Current State 和差距。","question":"我们已有能力与目标体验之间差什么","key_message":"Gap 必须同时覆盖算法能力、产品交互、信源规则和工程依赖","evidence_needed":["内部能力盘点","目标体验基准"],"analysis_method":"Current-vs-target gap analysis","visualization_candidate":"feature-table","dependencies":["s04","s05"]},
+    {"slide_id":"s07","sequence":7,"section_id":"sec-3","purpose":"把三类证据收敛为机会。","question":"什么用户问题值得我们解决","key_message":"机会应聚焦降低用户获得、理解和控制合适观感的成本","evidence_needed":["用户、竞品、现状三类支持性结论"],"analysis_method":"Insight-Implication-Opportunity synthesis","visualization_candidate":"pyramid","dependencies":["s04","s05","s06"]},
+    {"slide_id":"s08","sequence":8,"section_id":"sec-4","purpose":"提出可讨论的策略选择和边界。","question":"我们选择怎样的能力路径","key_message":"初步策略假设是从理解场景、解释建议到可预览和可撤回的应用闭环","evidence_needed":["Opportunity 优先级","技术可行性","业务目标"],"analysis_method":"Opportunity-Strategy-Capability","visualization_candidate":"strategy-house","dependencies":["s07"]},
+    {"slide_id":"s09","sequence":9,"section_id":"sec-4","purpose":"明确产品为谁、解决什么和不做什么。","question":"AI Picture 到底是什么产品","key_message":"产品定义必须固定目标用户、核心场景、价值主张和首期边界","evidence_needed":["目标用户","目标市场和机型","首期范围"],"analysis_method":"Positioning statement","visualization_candidate":"text","dependencies":["s08"]},
+    {"slide_id":"s10","sequence":10,"section_id":"sec-5","purpose":"解释价值如何由能力和基础支撑。","question":"产品由哪些层级和能力组成","key_message":"架构从用户价值和场景向下连接理解、推荐、预览、应用和算法基础","evidence_needed":["能力清单","技术边界","跨端依赖"],"analysis_method":"Layered product architecture","visualization_candidate":"architecture","dependencies":["s09"]},
+    {"slide_id":"s11","sequence":11,"section_id":"sec-5","purpose":"定义由验证到扩展的推进顺序。","question":"如何分阶段降低最大风险","key_message":"Roadmap 应先验证价值和可控性，再扩展场景、信源和生态能力","evidence_needed":["资源与依赖","风险排序","目标时间窗"],"analysis_method":"Risk-first phased roadmap","visualization_candidate":"roadmap","dependencies":["s10"]},
+    {"slide_id":"s12","sequence":12,"section_id":"sec-5","purpose":"定义产品价值如何被衡量。","question":"如何判断 AI Picture 有效","key_message":"指标需同时覆盖用户获得价值、产品使用质量和业务结果","evidence_needed":["现有指标基线","业务目标","埋点能力"],"analysis_method":"User-Product-Business metric tree","visualization_candidate":"architecture","dependencies":["s11"]}
+  ],
+  "open_questions": ["AI Picture 的首期产品形态", "目标市场、机型和时间", "当前能力与数据可用性", "用户研究计划", "竞品实测范围"],
+  "renderer_entry_gate": {"status":"blocked","blockers":["本测试不生成 PPTX", "业务事实和用户证据尚未取得", "部分内容页仍是待验证假设", "PowerPoint 原生字体和未使用版式尚未验证"]}
+}

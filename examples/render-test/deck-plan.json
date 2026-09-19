@@ -1,0 +1,26 @@
+{
+  "deck_id": "deck-ai-picture-render-test",
+  "deck_title": "AI Picture 产品方案",
+  "objective": "验证 Product PPT Agent 第二阶段的可编辑布局与渲染能力",
+  "audience": ["产品规划部", "研发与设计"],
+  "core_message": "用统一的产品分析结构驱动可编辑 PPT 生成",
+  "storyline": [
+    {"section_id": "sec-1", "role": "context", "question": "为什么做？", "answer": "行业和用户变化带来新的画质需求"},
+    {"section_id": "sec-2", "role": "choice", "question": "做什么？", "answer": "建立可理解、可配置、可演进的 AI Picture 方案"},
+    {"section_id": "sec-3", "role": "execution", "question": "怎么做？", "answer": "分阶段完成能力建设与验收"}
+  ],
+  "slides": [
+    {"slide_id":"s01","sequence":1,"section_id":"sec-1","purpose":"封面","question":"主题是什么？","key_message":"AI Picture 产品方案","evidence_needed":[],"analysis_method":"none","visualization_candidate":"cover","dependencies":[]},
+    {"slide_id":"s02","sequence":2,"section_id":"sec-1","purpose":"执行摘要","question":"应如何快速理解方案？","key_message":"从机会、方案到落地形成闭环","evidence_needed":[],"analysis_method":"summary","visualization_candidate":"executive-summary","dependencies":["s01"]},
+    {"slide_id":"s03","sequence":3,"section_id":"sec-1","purpose":"行业趋势","question":"需求如何变化？","key_message":"智能画质已成为核心增长方向","evidence_needed":[],"analysis_method":"trend","visualization_candidate":"bar-chart","dependencies":["s02"]},
+    {"slide_id":"s04","sequence":4,"section_id":"sec-1","purpose":"用户洞察","question":"用户在哪些环节受阻？","key_message":"设置复杂与结果不可预期是核心痛点","evidence_needed":[],"analysis_method":"journey","visualization_candidate":"journey-map","dependencies":["s03"]},
+    {"slide_id":"s05","sequence":5,"section_id":"sec-1","purpose":"竞品对比","question":"竞品如何解题？","key_message":"市场方案各有侧重但缺少完整闭环","evidence_needed":[],"analysis_method":"comparison","visualization_candidate":"four-cards","dependencies":["s04"]},
+    {"slide_id":"s06","sequence":6,"section_id":"sec-2","purpose":"机会识别","question":"优先投入什么？","key_message":"优先构建高价值且高可行性能力","evidence_needed":[],"analysis_method":"matrix-2x2","visualization_candidate":"matrix-2x2","dependencies":["s05"]},
+    {"slide_id":"s07","sequence":7,"section_id":"sec-2","purpose":"策略屋","question":"方案如何成立？","key_message":"三大支柱共同支撑用户可感知的画质价值","evidence_needed":[],"analysis_method":"strategy-house","visualization_candidate":"strategy-house","dependencies":["s06"]},
+    {"slide_id":"s08","sequence":8,"section_id":"sec-2","purpose":"产品架构","question":"能力如何分层？","key_message":"从交互到策略再到算法形成闭环","evidence_needed":[],"analysis_method":"architecture","visualization_candidate":"architecture","dependencies":["s07"]},
+    {"slide_id":"s09","sequence":9,"section_id":"sec-3","purpose":"路线图","question":"如何分阶段落地？","key_message":"先验证核心价值，再扩展场景与智能化","evidence_needed":[],"analysis_method":"roadmap","visualization_candidate":"roadmap","dependencies":["s08"]},
+    {"slide_id":"s10","sequence":10,"section_id":"sec-3","purpose":"封底","question":"如何结束？","key_message":"THANKS","evidence_needed":[],"analysis_method":"none","visualization_candidate":"ending","dependencies":["s09"]}
+  ],
+  "open_questions": [],
+  "renderer_entry_gate": {"status": "ready", "blockers": []}
+}

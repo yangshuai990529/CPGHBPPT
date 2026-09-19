@@ -1,0 +1,1 @@
+Department responsibility, review flow and decision procedures are **not populated**: no approved departmental source has been supplied. Do not infer company policy from an old PPT, template or a synthetic example. Add only approved, dated procedures with owner, scope and source.

@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Asset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "asset_id",
+    "type",
+    "brand",
+    "product",
+    "source_url",
+    "source_id",
+    "local_path",
+    "format",
+    "width",
+    "height",
+    "has_transparency",
+    "usage",
+    "license_notes",
+    "status"
+  ],
+  "properties": {
+    "asset_id": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "product_image",
+        "logo",
+        "ui_screenshot",
+        "website_screenshot",
+        "svg",
+        "diagram"
+      ]
+    },
+    "brand": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "local_path": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string"
+    },
+    "width": {
+      "type": "integer"
+    },
+    "height": {
+      "type": "integer"
+    },
+    "has_transparency": {
+      "type": "boolean"
+    },
+    "usage": {
+      "type": "string"
+    },
+    "license_notes": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "LOW_RESOLUTION",
+        "INVALID_IMAGE",
+        "BAD_ASPECT_RATIO",
+        "DUPLICATE_ASSET",
+        "unavailable",
+        "review_required",
+        "approved_internal"
+      ]
+    },
+    "content_hash": {
+      "type": "string"
+    },
+    "asset_type": {
+      "enum": [
+        "product_image",
+        "feature_image",
+        "feature_screenshot",
+        "ui_screenshot",
+        "logo",
+        "diagram",
+        "scene_image"
+      ]
+    },
+    "entity": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "semantic_description": {
+      "type": "string"
+    },
+    "visual_content": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_slides": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_page_url": {
+      "type": "string"
+    },
+    "quality": {
+      "type": "object"
+    },
+    "source": {
+      "type": "object"
+    },
+    "rights": {
+      "type": "object"
+    },
+    "semantic_review": {
+      "type": "string"
+    },
+    "visual_role": {
+      "enum": [
+        "EVIDENCE_VISUAL",
+        "CONTEXT_VISUAL",
+        "DECORATIVE_VISUAL"
+      ]
+    },
+    "used": {
+      "type": "boolean"
+    },
+    "perceptual_hash": {
+      "type": "string"
+    },
+    "duplicate_of": {
+      "type": "string"
+    }
+  }
+}
