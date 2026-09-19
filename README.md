@@ -134,38 +134,6 @@ CPGHBPPT 会按任务自动选择最少且足够的 Skills。标准顺序是：*
 | `strategy-house` | 表达由共同基础支撑多个策略支柱、再共同支持目标的结构。 |
 | `timeline` | 表达日期、里程碑或历史顺序，时间本身必须对结论有意义。 |
 
-<details>
-<summary><strong>TV / AI Domain Skills：电视画质与 AI TV 专项技能（22 个，点击展开）</strong></summary>
-
-这些技能用于选择分析维度和检查问题，**不是当前产品规格或竞品事实来源**。
-
-| Skill | 作用 |
-| --- | --- |
-| `ai-agent-analysis` | 按感知、记忆、目标、行动和用户控制，区分语音助手、自动化与 Agent 式规划执行。 |
-| `ai-assistant-analysis` | 分析 AI Assistant 能完成的任务、交互边界和用户可见限制。 |
-| `ai-content` | 分析内容识别、理解、发现和推荐链路中的证据。 |
-| `ai-interaction` | 评估语音、遥控器、视觉等多模态 TV 交互流程。 |
-| `ai-memory` | 评估记忆、存储、召回声明及隐私边界。 |
-| `ai-personalization` | 评估用户偏好与个性化能力，避免把简单规则误写成自适应学习。 |
-| `ai-picture` | 将 AI TV 能力与真实画质处理链路和证据连接起来。 |
-| `ai-picture-analysis` | 沿输入、识别、处理、自动调节和用户控制分析 AI Picture，避免把 AI 品牌词等同于已验证学习能力。 |
-| `ai-recommendation` | 评估推荐相关性、解释性、反馈机制和用户控制。 |
-| `ai-tv-market` | 用明确时间、地区和研究口径定义 AI TV 市场问题。 |
-| `calibration-analysis` | 按信号、目标、测量基线、应用设置和验证结果分析电视校准流程。 |
-| `color-analysis` | 区分色彩能力、客观准确性与用户主观偏好。 |
-| `dolby-vision-analysis` | 按设备型号、地区、信号和内容范围核验 Dolby Vision 能力。 |
-| `game-picture-analysis` | 按信源、HDMI 端口、信号格式和模式分析游戏画质能力。 |
-| `hdr-analysis` | 在明确 HDR 格式、内容、设备和信号范围后进行 HDR 产品分析。 |
-| `local-dimming-analysis` | 区分 Local Dimming 宣传声明、技术配置与实际测量/观察效果。 |
-| `mini-led-analysis` | 根据决策问题选择 Mini LED 竞品分析维度，而不是套固定参数清单。 |
-| `motion-analysis` | 分析运动处理、帧率、信号兼容性和模式状态。 |
-| `picture-mode-analysis` | 检查图效模式的入口、状态、适用信号、切换行为和参数关系。 |
-| `picture-quality-competitor-analysis` | 对指定型号和市场做有来源的电视画质竞品对比，并按决策问题选择维度。 |
-| `picture-quality-overview` | 建立电视画质分析范围，区分信号、模式、处理模块和使用场景。 |
-| `tv-picture-quality` | 组织电视画质产品 PPT 的证据和分析框架；不提供未经核验的当前规格。 |
-
-</details>
-
 ## 设计模板与许可
 
 - `PPT设计规范/` **会随仓库发布**，安装时自动复制运行时母版。
