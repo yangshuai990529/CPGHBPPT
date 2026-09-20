@@ -115,7 +115,7 @@ FACT is an exact verifiable assertion supported by a Source. A cited vendor asse
 
 ## Citation and Asset Rules
 
-Slides show short publisher/date citations; full URLs appear in Sources Appendix and speaker notes, with Evidence ID lineage. Screenshots are visual assets, not substitutes for extractable text. Prefer official assets and preserve original URL, license caveats, local path, hash, size, transparency; low-resolution, corrupt, unsafe SVG or duplicates require review. Do not use an official image as if its reuse rights were automatically granted.
+Slides show short publisher/date citations; full URLs appear in Sources Appendix and speaker notes, with Evidence ID lineage. Screenshots are visual assets, not substitutes for extractable text. Capture verified webpage or local-PDF content directly to PNG; do not download SVG/vector artwork for generated decks. Preserve page URL, license caveats, local path, hash and size; low-resolution, blocked or duplicate screenshots require review. Do not use an official-page screenshot as if its reuse rights were automatically granted.
 
 ## Research Stop Conditions
 
@@ -140,3 +140,5 @@ For `/CPGHBPPT review`, use `./CPGHBPPT review <file.pptx>` read-only and report
 ## CPGHBPPT V1 收敛（2026-09-20）
 
 默认主入口使用项目约定 `/CPGHBPPT`，唯一 CLI 为仓库根目录 `./CPGHBPPT`。Agent 参考 Skill 位于 `technical/.agents/skills/cpghbppt/SKILL.md`；此约定并不是已在所有 Agent 宿主注册的原生 Slash Command。不要把 `COMPLETED_RESEARCH_READOUT` 冒充已验证的产品策略终稿。个人知识、旧 PPT、输入和生成项目保存在仓库根目录下被 Git 忽略的 `workspace/`、`input/`、`projects/` 中；`PPT设计规范/` 已由仓库所有者明确授权公开提交，但不代表将模板和品牌元素按 MIT 许可再授权。
+
+用户明确目标后，Agent 必须先确认 `local / web / hybrid` 数据模式，再确认是否需要图片。`web` 和 `hybrid` 要实际联网核验 Source/Claim/Evidence；需要图片时只使用网页或本地 PDF 截图 PNG，不下载 SVG/矢量图。Renderer 必须保留用户模板母版、Logo、页码、保密标识和保留区，只在内容安全区内优化层级与排版。

@@ -11,7 +11,10 @@ research:
     - Samsung
     - Sony
     - Hisense
-  source_mode: public
+  source_mode: web
+visual:
+  enabled: true
+  acquisition: screenshot
 reasoning:
   enabled: true
   mode: normal

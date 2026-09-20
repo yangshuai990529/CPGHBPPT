@@ -6,6 +6,7 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {dependencies} from '../../app/runtime/dependencies.mjs';
+import {resolveTemplate} from '../../app/runtime/template.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const run=(cmd,args)=>new Promise((resolve,reject)=>{const child=spawn(cmd,args,{cwd:root,stdio:['ignore','pipe','pipe']});let out='';child.stdout.on('data',x=>out+=x);child.stderr.on('data',x=>out+=x);child.on('close',code=>code===0?resolve(out):reject(new Error(out)));child.on('error',reject);});
@@ -21,7 +22,8 @@ test('python-pptx provider preserves master and emits editable native shapes',as
   {slide_id:'s03',slide_type:'ending',title:'谢谢',content:{structured_data:{}},layout:{layout_id:'tcl-ending-01'},sources:[]}
  ]));
  const python=(await dependencies(root)).RUNTIME_PYTHON;
- await run(python,['engine/renderer/providers/python_pptx_renderer.py','templates/tcl-product/master.pptx',deck,slides,assets,pptx,models]);
+ const template=await resolveTemplate(root,'tcl-product');
+ await run(python,['engine/renderer/providers/python_pptx_renderer.py',template.master,deck,slides,assets,pptx,models]);
  const check=JSON.parse(await run(python,['tools/inspect_pptx_native.py',pptx,'3','0']));
  assert.equal(check.status,'pass');assert.equal(check.slide_count,3);assert.ok(check.editable_shapes>0);
  const rendered=JSON.parse(await fs.readFile(models,'utf8'));assert.equal(rendered[1].elements.some(x=>x.text?.includes('这段文字必须作为文本框写入')),true);

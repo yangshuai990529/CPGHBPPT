@@ -7,7 +7,10 @@ presentation:
 research:
   enabled: false
   competitors: []
-  source_mode: provided-only
+  source_mode: local
+visual:
+  enabled: false
+  acquisition: screenshot
 reasoning:
   enabled: true
   mode: normal
@@ -20,4 +23,4 @@ output:
 runtime:
   offline: true
 input_files:
-  - input/strategy.md
+  - brief.md

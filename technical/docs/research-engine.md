@@ -8,7 +8,7 @@
 - `engine/research/source`: public HTTPS restriction, redirect checks, authority ranking, freshness windows.
 - `engine/research/evidence`: literal substring extraction, Claim state, conservative numeric conflict detection.
 - `engine/research/competitor`: `✓/?/!` matrix and denominator-based coverage.
-- `engine/research/assets`: official HTTPS download, PNG/GIF/WebP/SVG inspection, content hashes, manual usage review.
+- `engine/research/visual`: verified official-page screenshots to PNG, content hashes, entity/slot matching and internal-use review. The generation path does not download SVG/vector artwork.
 - `engine/research/cache`: URL-keyed local cache with TTL; `engine/research/synthesis`: facts-only summary.
 - `engine/research/citation`: short slide citation and full source index.
 - `engine/context`: role-specific, minimal, deduplicated Reasoning Context.
@@ -34,6 +34,5 @@ The example deck is **a research readout**, not a TCL strategy proposal. It has 
 
 - Three live US official pages fetched: Samsung 2025 8K Neo QLED highlights, Sony XR Processor overview, Hisense 65U8QG product page. Publication date was not confirmed from page metadata. Only literal page passages were accepted as evidence; the three-brand insight is explicitly bounded to these pages.
 - 14/30 planned cells found (Samsung 6/10, Sony 4/10, Hisense 4/10); 16 gaps remain unknown, not unsupported product capabilities. No conflicting numeric claims were present in this sample.
-- One Samsung-hosted image (1920×760) downloaded from a verified official-page reference, status `review_required` for reuse rights; intentionally not embedded in the deck.
-- Playwright package imported, but the Chromium browser executable was not installed, so live screenshot capture was not performed. This is a known optional-provider limitation, not a successful screenshot test.
-- The 10-page research readout passed package integrity, layout, rule-based QA and both preview generators; the optional visual critic remains disabled. Source citations appear by publisher/date on slides, URLs in notes and appendix.
+- Web visuals are captured directly from verified official pages as PNG screenshots. Element/section capture is preferred; when the target selector is unavailable, the browser records a viewport fallback instead of downloading an image file.
+- The 10-page research readout passes package integrity, editable-shape checks, rule-based QA and rendered-PNG coverage checks. Source citations appear by publisher/date on slides, URLs in notes and appendix.

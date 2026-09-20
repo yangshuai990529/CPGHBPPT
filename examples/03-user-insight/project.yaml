@@ -8,7 +8,10 @@ presentation:
 research:
   enabled: false
   competitors: []
-  source_mode: provided-only
+  source_mode: local
+visual:
+  enabled: true
+  acquisition: screenshot
 reasoning:
   enabled: true
   mode: normal

@@ -18,6 +18,29 @@ cd CPGHBPPT
 ./CPGHBPPT doctor
 ```
 
+## 生成 PPT
+
+当用户说明主题和目标后，Agent 必须再确认两项：
+
+1. 数据来源：本地数据、联网生成、本地 + 联网生成。
+2. 是否需要图片。如果需要，系统从已核验的网页或本地 PDF 直接截图为 PNG 并放入 PPT，不下载 SVG/矢量素材。
+
+交互执行：
+
+```bash
+./CPGHBPPT build --topic "比较 Samsung、Sony、Hisense 的 AI Picture 能力" --type competitor-analysis
+```
+
+非交互执行需显式传入两个选项：
+
+```bash
+./CPGHBPPT build --topic "..." --source-mode web --images yes
+./CPGHBPPT build brief.md --source-mode local --images yes
+./CPGHBPPT build brief.md --input data.csv --source-mode hybrid --images no
+```
+
+`web` 和 `hybrid` 模式必须先完成真实联网 Research：记录网页 URL、核验日期、原文证据和缺口，再进入内容推理。渲染器使用用户指定的企业模板母版，只在内容安全区中优化字号、层级、留白、图表和图片位置，不改动 Logo、页码、保密标识和模板结构。
+
 ## Skills：每个技能是干什么的
 
 

@@ -1,6 +1,7 @@
 import { CAPABILITIES } from '../planner/index.mjs';
 export function competitorMatrix(brands,claims) {
-  return {legend:{'✓':'supported by evidence','?':'no reliable evidence; not equivalent to absence','!':'conflict'},rows:CAPABILITIES.map(capability=>({capability,cells:Object.fromEntries(brands.map(brand=>{
+  const observed=[...new Set(claims.map(x=>x.capability).filter(Boolean))],capabilities=observed.length?observed:CAPABILITIES;
+  return {legend:{'✓':'supported by evidence','?':'no reliable evidence; not equivalent to absence','!':'conflict'},rows:capabilities.map(capability=>({capability,cells:Object.fromEntries(brands.map(brand=>{
     const cs=claims.filter(c=>c.entity===brand&&c.capability===capability);
     const valid=cs.filter(c=>c.status==='SUPPORTED');
     return [brand,{value:cs.some(c=>c.status==='CONFLICTED')?'!':valid.length?'✓':'?',claim_ids:valid.map(c=>c.claim_id),evidence_ids:valid.flatMap(c=>c.evidence_ids)}];

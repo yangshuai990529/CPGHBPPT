@@ -5,6 +5,10 @@ presentation:
   type: product-overview
 research:
   enabled: true
+  source_mode: web
+visual:
+  enabled: true
+  acquisition: screenshot
 output:
   pptx: true
   preview: true
