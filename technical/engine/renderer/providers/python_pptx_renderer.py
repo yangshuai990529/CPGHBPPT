@@ -11,6 +11,7 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
+from pptx.enum.shapes import MSO_SHAPE
 
 master, deck_file, slides_file, assets_file, output_file, models_file = map(Path,sys.argv[1:7])
 slide_specs=json.loads(slides_file.read_text());assets={a['asset_id']:a for a in json.loads(assets_file.read_text()).get('assets',[])} if assets_file.exists() else {}
@@ -24,6 +25,11 @@ INK=RGBColor(37,37,37);MUTED=RGBColor(102,113,122);RED=RGBColor(233,0,0)
 FONT='PingFang SC';models=[];PX=96
 
 def area(x,y,w,h):return Inches(x/PX),Inches(y/PX),Inches(w/PX),Inches(h/PX)
+def region(spec,name,default):
+ value=spec.get('layout_plan',{}).get('regions',{}).get(name)
+ if not value:return default
+ return (value.get('x',default[0]),value.get('y',default[1]),value.get('w',default[2]),value.get('h',default[3]))
+
 def add_text(slide,text,frame,size=16,bold=False,color=INK,kind='Text',align=PP_ALIGN.LEFT):
  x,y,w,h=area(*frame);box=slide.shapes.add_textbox(x,y,w,h);tf=box.text_frame;tf.clear();tf.word_wrap=True;tf.vertical_anchor=MSO_ANCHOR.TOP;tf.margin_left=tf.margin_right=Inches(.025);tf.margin_top=tf.margin_bottom=Inches(.015)
  for i,line in enumerate(str(text or '').split('\n')):
@@ -41,6 +47,30 @@ def add_image(slide,ref,frame):
   buf=io.BytesIO();img.convert('RGB').save(buf,'PNG');b=buf.getvalue()
  x,y,fw,fh=frame;scale=min(fw/w,fh/h);pw,ph=w*scale,h*scale;slide.shapes.add_picture(io.BytesIO(b),*area(x+(fw-pw)/2,y+(fh-ph)/2,pw,ph))
  current['elements'].append({'type':'Image','frame':{'x':x+(fw-pw)/2,'y':y+(fh-ph)/2,'w':pw,'h':ph},'role':'image','asset_id':ref['asset_id'],'entity':ref['entity'],'fit':'contain','width':w,'height':h})
+
+def add_panel(slide,frame,fill=RGBColor(247,248,249),line=RGBColor(225,228,231),radius=True):
+ x,y,w,h=area(*frame);shape=slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE if radius else MSO_SHAPE.RECTANGLE,x,y,w,h);shape.fill.solid();shape.fill.fore_color.rgb=fill;shape.line.color.rgb=line;shape.line.width=Pt(.8)
+ current['elements'].append({'type':'Panel','frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'role':'grouping','allowOverlap':True})
+ return shape
+
+def add_divider(slide,frame,color=RGBColor(220,223,226)):
+ x,y,w,h=area(*frame);shape=slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,x,y,w,h);shape.fill.solid();shape.fill.fore_color.rgb=color;shape.line.fill.background();current['elements'].append({'type':'Divider','frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'role':'divider','allowOverlap':True})
+ return shape
+
+def add_native_table(slide,table_data,frame):
+ headers=table_data.get('headers',[]);rows=table_data.get('rows',[])
+ if len(headers)<2 or not rows or len(rows)>8 or any(len(row)!=len(headers) for row in rows):raise ValueError('Table needs 2+ columns and 1–8 complete rows per slide')
+ x,y,w,h=area(*frame);shape=slide.shapes.add_table(len(rows)+1,len(headers),x,y,w,h);table=shape.table
+ if len(headers)==2:table.columns[0].width=Inches(1.55);table.columns[1].width=w-Inches(1.55)
+ table.rows[0].height=Inches(.5)
+ for i,row in enumerate([headers,*rows]):
+  for j,value in enumerate(row):
+   cell=table.cell(i,j);cell.text=str(value);cell.vertical_anchor=MSO_ANCHOR.MIDDLE
+   cell.margin_left=Inches(.12);cell.margin_right=Inches(.1);cell.margin_top=Inches(.07);cell.margin_bottom=Inches(.06)
+   cell.fill.solid();cell.fill.fore_color.rgb=RGBColor(245,245,245) if i==0 else RGBColor(255,255,255)
+   for p in cell.text_frame.paragraphs:
+    for run in p.runs:run.font.name=FONT;run.font.size=Pt(16 if i==0 else 15);run.font.bold=i==0;run.font.color.rgb=INK
+ current['elements'].append({'type':'Table','frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'role':'table','rows':len(rows),'columns':len(headers),'minFontPt':15,'text':' '.join(str(value) for row in [headers,*rows] for value in row)[:1200]})
 
 def source(slide,spec):
  if not spec.get('sources'):return
@@ -67,7 +97,13 @@ for idx,spec in enumerate(slide_specs):
  if spec['slide_type']=='ending':prs.slides.add_slide(ending_layout);continue
  slide=prs.slides.add_slide(content_layout);add_text(slide,spec['title'],(128,28,820,58),26,True,kind='Title')
  data=spec.get('content',{}).get('structured_data') or {};layout=spec.get('layout',{}).get('layout_id');conclusion=spec.get('content',{}).get('conclusion') or spec.get('key_message','')
- if layout=='L20_EXECUTIVE_SUMMARY':
+ if layout=='L02_HERO_INSIGHT':
+  add_text(slide,conclusion,(120,145,900,125),24,True,kind='Insight')
+  add_text(slide,data.get('body') or '\n\n'.join(spec.get('content',{}).get('analysis',[])),(120,290,900,285),18,kind='Text')
+ elif layout=='L10_COMPARISON_TABLE':
+  add_native_table(slide,data.get('table') or {},(120,155,900,420))
+  if spec.get('content',{}).get('implication'):add_text(slide,spec['content']['implication'],(120,585,900,38),15,kind='Insight')
+ elif layout=='L20_EXECUTIVE_SUMMARY':
   add_text(slide,data.get('headline',conclusion),(120,138,900,88),22,True,kind='Insight')
   findings=data.get('findings',[])
   for i,item in enumerate(findings[:3]):
@@ -92,6 +128,35 @@ for idx,spec in enumerate(slide_specs):
    elif layout=='L21_COMPETITOR_VISUAL_3COL':add_text(slide,'未找到可验证的网页截图',(x+10,214,width-20,130),15,color=MUTED)
    add_text(slide,item.get('summary',''),(x+10,400 if ref else 235,width-20,158 if ref else 315),15,kind='Card')
   add_text(slide,conclusion,(120,574,900,50),15,True,kind='Insight')
+ elif layout=='L22_HERO_EVIDENCE':
+  ref=next((r for r in spec.get('assets',[]) if r.get('status')=='approved'),None)
+  if not ref:raise ValueError('Hero evidence slide requires an approved screenshot')
+  shot=region(spec,'screenshot',(135,150,870,360));add_panel(slide,(120,137,900,395),fill=RGBColor(250,250,250));add_image(slide,ref,shot)
+  highlight=(data.get('evidence_items') or [{}])[0];add_panel(slide,(120,548,900,62),fill=RGBColor(248,248,248),line=RED)
+  add_text(slide,highlight.get('claim',conclusion),(144,559,852,38),16,True,kind='Insight')
+ elif layout=='L23_EVIDENCE_INSIGHT':
+  ref=next((r for r in spec.get('assets',[]) if r.get('status')=='approved'),None)
+  if not ref:raise ValueError('Evidence-insight slide requires an approved screenshot')
+  panel=region(spec,'screenshot_panel',(120,137,510,350));shot=region(spec,'screenshot',(130,147,490,330));add_panel(slide,panel,fill=RGBColor(250,250,250));add_image(slide,ref,shot)
+  items=data.get('evidence_items') or [{'label':'核心发现','claim':value} for value in spec.get('content',{}).get('analysis',[])[:3]]
+  for i,item in enumerate(items[:3]):
+   y=145+i*103;add_text(slide,item.get('label','核心发现').upper(),(658,y,350,28),15,True,color=RED,kind='Label');add_text(slide,item.get('claim',''),(658,y+32,350,58),16,kind='Card')
+   if i<min(len(items),3)-1:add_divider(slide,(658,y+94,350,2))
+  insight=data.get('product_insight') or spec.get('content',{}).get('implication','')
+  insight_frame=region(spec,'product_insight',(120,510,900,100));add_panel(slide,insight_frame,fill=RGBColor(246,247,248),line=RGBColor(220,223,226));add_text(slide,'产品启示',(insight_frame[0]+22,insight_frame[1]+13,100,24),15,True,color=RED,kind='Label');add_text(slide,insight,(insight_frame[0]+22,insight_frame[1]+40,insight_frame[2]-50,45),16,True,kind='Insight')
+ elif layout=='L24_EVIDENCE_GRID':
+  refs=[r for r in spec.get('assets',[]) if r.get('status')=='approved'][:6];items=data.get('evidence_items') or []
+  if len(refs)<2:raise ValueError('Evidence grid requires at least two approved screenshots')
+  cols=2;gap=18;card_w=(900-gap)/2;rows=(len(refs)+1)//2;card_h=(450-gap*(rows-1))/rows
+  for i,ref in enumerate(refs):
+   x=120+(i%cols)*(card_w+gap);y=145+(i//cols)*(card_h+gap);add_panel(slide,(x,y,card_w,card_h));add_image(slide,ref,(x+10,y+10,card_w*.43,card_h-20));item=items[i] if i<len(items) else {};add_text(slide,item.get('label',ref.get('entity','Evidence')),(x+card_w*.47,y+18,card_w*.49-12,28),15,True,color=RED,kind='Label');add_text(slide,item.get('claim',''),(x+card_w*.47,y+52,card_w*.49-12,card_h-68),15,kind='Card')
+ elif layout=='L25_MULTI_SOURCE_EVIDENCE':
+  refs=[r for r in spec.get('assets',[]) if r.get('status')=='approved'][:3];items=data.get('competitors') or data.get('evidence_items') or []
+  if len(refs)<2:raise ValueError('Multi-source evidence requires at least two approved screenshots')
+  gap=16;width=(900-gap*(len(refs)-1))/len(refs)
+  for i,ref in enumerate(refs):
+   x=120+i*(width+gap);item=items[i] if i<len(items) else {};name=item.get('name') or ref.get('entity','');add_text(slide,name,(x+6,142,width-12,34),17,True,color=RED,kind='Label');add_panel(slide,(x,184,width,226));add_image(slide,ref,(x+8,192,width-16,210));add_text(slide,item.get('summary') or item.get('claim',''),(x+8,425,width-16,116),15,kind='Card')
+  add_panel(slide,(120,557,900,53),fill=RGBColor(247,248,249));add_text(slide,conclusion,(140,568,860,30),15,True,kind='Insight')
  elif layout=='L07_IMAGE_TEXT':
   ref=next((r for r in spec.get('assets',[]) if r.get('status')=='approved'),None)
   if not ref:raise ValueError('Image-text slide requires an approved screenshot')

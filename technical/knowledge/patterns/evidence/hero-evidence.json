@@ -1,0 +1,14 @@
+{
+  "pattern_id": "HERO_EVIDENCE",
+  "name": "Hero Evidence",
+  "pattern_type": "slide",
+  "problem": "一条关键官方证据需要成为页面视觉中心，而不是缩成装饰截图。",
+  "structure": ["Assertion Title", "Large Evidence Screenshot", "Evidence Highlight", "Source"],
+  "when_to_use": ["只有一条决定性官方证据", "证据区域可裁切并在正常放映尺寸下阅读"],
+  "when_not_to_use": ["截图只能使用整页缩略图", "需要同时解释多个独立能力"],
+  "quality_checks": ["截图占有效内容区至少 20%", "标题表达结论", "高亮区域与 Evidence ID 对应", "三秒内可识别页面结论"],
+  "evidence": [],
+  "limitations": ["无法定位证据区域时必须换图或改用文字加截图组合"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

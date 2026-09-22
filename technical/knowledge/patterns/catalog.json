@@ -1,9 +1,45 @@
 {
   "version": "1.0.0",
   "patterns": [
-    {"pattern_id": "TREND_TO_GAP", "path": "storyline/trend-to-gap.json", "maturity": "candidate"},
-    {"pattern_id": "COMPETITOR_TO_OPPORTUNITY", "path": "storyline/competitor-to-opportunity.json", "maturity": "candidate"},
-    {"pattern_id": "EVIDENCE_TO_CONCLUSION", "path": "slides/evidence-to-conclusion.json", "maturity": "candidate"},
-    {"pattern_id": "LAYERED_PRODUCT_ARCHITECTURE", "path": "visualization/layered-product-architecture.json", "maturity": "candidate"}
+    {
+      "pattern_id": "TREND_TO_GAP",
+      "path": "storyline/trend-to-gap.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "COMPETITOR_TO_OPPORTUNITY",
+      "path": "storyline/competitor-to-opportunity.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "EVIDENCE_TO_CONCLUSION",
+      "path": "slides/evidence-to-conclusion.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "LAYERED_PRODUCT_ARCHITECTURE",
+      "path": "visualization/layered-product-architecture.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "HERO_EVIDENCE",
+      "path": "evidence/hero-evidence.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "EVIDENCE_INSIGHT",
+      "path": "evidence/evidence-insight.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "EVIDENCE_GRID",
+      "path": "evidence/evidence-grid.json",
+      "maturity": "candidate"
+    },
+    {
+      "pattern_id": "MULTI_SOURCE_EVIDENCE",
+      "path": "evidence/multi-source-evidence.json",
+      "maturity": "candidate"
+    }
   ]
 }

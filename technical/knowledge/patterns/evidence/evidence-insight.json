@@ -1,0 +1,14 @@
+{
+  "pattern_id": "EVIDENCE_INSIGHT",
+  "name": "Evidence and Insight",
+  "pattern_type": "slide",
+  "problem": "官网证据与提炼结论需要形成主次，而不是并列堆放原文。",
+  "structure": ["Assertion Title", "Large Evidence Screenshot", "Two or Three Findings", "Product Insight", "Source"],
+  "when_to_use": ["一个品牌有一张可读截图和两到三个同主题发现", "产品启示能够回溯到本页 Evidence"],
+  "when_not_to_use": ["发现彼此无关", "截图与结论没有语义对应"],
+  "quality_checks": ["截图是第一或第二视觉落点", "右侧只保留两到三个短结论", "Product Insight 不超出证据", "原始外文仅作为小字证据"],
+  "evidence": [],
+  "limitations": ["产品启示只能是有证据边界的解释，不生成无来源策略"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

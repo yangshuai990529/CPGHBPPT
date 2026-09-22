@@ -18,7 +18,7 @@
   },
   "scripts": {
     "doctor": "node app/commands/cli.mjs doctor",
-    "test": "node --test tests/app/app.test.mjs tests/app/incremental-learn.test.mjs tests/renderer/python-provider.test.mjs tests/renderer/partial-rebuild.test.mjs tests/visual/visual.test.mjs tests/research/research.test.mjs tests/phase5/phase5.test.mjs tests/phase5/domain-skill.test.mjs && node tests/golden/check.mjs",
+    "test": "node --test tests/app/app.test.mjs tests/app/capabilities.test.mjs tests/app/planning.test.mjs tests/app/incremental-learn.test.mjs tests/renderer/python-provider.test.mjs tests/renderer/partial-rebuild.test.mjs tests/visual/visual.test.mjs tests/research/research.test.mjs tests/phase5/phase5.test.mjs tests/phase5/domain-skill.test.mjs && node tests/golden/check.mjs",
     "validate": "python3 tools/validate_phase1.py"
   }
 }

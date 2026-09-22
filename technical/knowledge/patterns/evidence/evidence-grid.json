@@ -1,0 +1,14 @@
+{
+  "pattern_id": "EVIDENCE_GRID",
+  "name": "Evidence Grid",
+  "pattern_type": "slide",
+  "problem": "四到六条证据需要分组浏览，不能写成六个长段落。",
+  "structure": ["Assertion Title", "2 by 2 or 2 by 3 Evidence Grid", "Short Claim", "Source"],
+  "when_to_use": ["有四到六条同层级证据", "每条证据都有截图或清晰标识"],
+  "when_not_to_use": ["存在一条明显更重要的主证据", "证据需要长篇解释"],
+  "quality_checks": ["每格只保留一个短结论", "证据卡片尺寸一致", "重复证据已合并", "截图总面积不低于有效内容区 20%"],
+  "evidence": [],
+  "limitations": ["证据超过六条时应拆页或先聚类"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

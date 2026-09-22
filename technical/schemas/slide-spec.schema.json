@@ -538,6 +538,12 @@
           "type": "string"
         }
       }
+    },
+    "visual_plan": {
+      "type": "object"
+    },
+    "layout_plan": {
+      "type": "object"
     }
   }
 }

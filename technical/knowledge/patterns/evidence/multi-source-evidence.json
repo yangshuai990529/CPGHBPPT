@@ -1,0 +1,14 @@
+{
+  "pattern_id": "MULTI_SOURCE_EVIDENCE",
+  "name": "Multi-source Evidence",
+  "pattern_type": "slide",
+  "problem": "多个品牌的官方证据需要按统一维度并列比较。",
+  "structure": ["Assertion Title", "Three-column Comparison", "Brand", "Evidence Screenshot", "Key Finding", "Source"],
+  "when_to_use": ["两到三个品牌使用同一比较维度", "每列均有来源和可读的局部截图"],
+  "when_not_to_use": ["比较口径不同", "只有一个品牌有截图"],
+  "quality_checks": ["各列结构一致", "截图不跨品牌借用", "关键发现短且可比", "缺图时明确缺口而不是装饰替代"],
+  "evidence": [],
+  "limitations": ["截图内小字不可作为唯一证据，必须配合提炼文字"],
+  "maturity": "candidate",
+  "version": "1.0.0"
+}

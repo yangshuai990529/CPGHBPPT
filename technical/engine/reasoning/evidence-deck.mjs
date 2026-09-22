@@ -1,44 +1,104 @@
-// Product Reasoning adapter: intentionally separate from Research, and explicitly scoped.
-// A sparse dataset produces a research readout, not a speculative TCL strategy.
-import fs from 'node:fs/promises';import path from 'node:path';
-import {citationsForSlide} from '../research/citation/index.mjs';import {matchSlideAssets} from '../research/visual/slide-matcher/index.mjs';
-const ev=(dataset,brands,caps)=>dataset.evidence.filter(e=>brands.includes(e.entity)&&caps.includes(e.capability));
-export async function makeEvidenceDeck(dataset,root,out,{domainContext=null,visualManifest=null,localInputs=[]}={}) {
-  const templates=JSON.parse(await fs.readFile(path.join(root,'tests/fixtures/render-test/slide-specs.json'),'utf8'));
-  const deck=JSON.parse(await fs.readFile(path.join(root,'tests/fixtures/render-test/deck-plan.json'),'utf8'));
-  const brands=dataset.research_plan.brief.brands;const E=(b,c)=>ev(dataset,b,c);const all=dataset.evidence,topic=dataset.research_plan.brief.topic??dataset.research_plan.brief.objective??'产品研究',capabilities=dataset.competitor_matrix.rows.map(x=>x.capability),sharedCapability=capabilities.find(cap=>brands.every(b=>E([b],[cap]).length>0)),sharedEvidence=sharedCapability?E(brands,[sharedCapability]):all.slice(0,Math.max(1,brands.length));
-  // Cross-brand interpretation is bounded to the verified source sample.
-  const shared=!!sharedCapability;
-  const insight={insight_id:'ins-public-evidence',level:'INSIGHT',statement:shared?`在本次已核验页面中，${brands.length} 个研究对象都提及“${sharedCapability}”。`:`当前已核验页面仍不足以得出 ${topic} 的跨对象共同结论。`,upstream_ids:sharedEvidence.map(e=>e.claim_id),source_ids:[...new Set(sharedEvidence.map(e=>e.source_id))],supporting_evidence:sharedEvidence.map(e=>e.evidence_id),reasoning_summary:'限定于本次已核验公开页面，不推断市场普及度、效果优劣或本方产品策略。',confidence:shared?'medium':'low',status:shared?'supported':'needs_evidence'};
-  const set=(i,title,conclusion,analysis,data,viz,used)=>{const s=templates[i-1];s.title=title;s.key_message=conclusion;s.content={conclusion,analysis,implication:'研究范围仅限此次已核验公开页面。',structured_data:data??{},speaker_note:null};if(viz)s.visualization.data=viz;s.evidence=used.map(e=>({evidence_id:e.evidence_id,claim:dataset.claims.find(c=>c.claim_id===e.claim_id)?.statement??e.quote_or_fact,evidence_type:'fact',status:'supported',source_ids:[e.source_id],note:`原文：${e.quote_or_fact}`}));s.sources=[...new Set(used.map(e=>e.source_id))];s.render_options.source_labels=s.sources.map(id=>{const src=allSources.find(x=>x.source_id===id);return `${src?.publisher??id} (${src?.locator.accessed_at?.slice(0,10)??'unknown'})`;});s.render_options.source_urls=s.sources.map(id=>allSources.find(x=>x.source_id===id)?.locator.uri??'');s.notes=[`research evidence: ${used.map(e=>e.evidence_id).join(', ')}`];s.status='ready_for_renderer';return s;};
-  const allSources=dataset.sources;
-  set(1,`${topic} 公开证据概览`,'将已核验网页证据、覆盖范围和研究缺口并列呈现',[],{subtitle:'Product PPT Agent · Web research · '+new Date().toISOString().slice(0,10)},null,[]);
-  set(2,shared?`已核验页面中出现共同主题：${sharedCapability}`:'当前证据尚未形成跨对象共同结论',insight.statement,['结论只适用于本次已核验页面','未找到的字段保持为未知'],{headline:insight.statement,findings:brands.slice(0,3).map(b=>{const claims=dataset.claims.filter(c=>c.entity===b&&c.status==='SUPPORTED');return {title:b,body:claims[0]?.statement??'未找到可直接支持的声明'};}),decision:'策略和功能决策仍需用户证据、内部能力和效果验证。'},null,sharedEvidence);
-  set(3,`研究覆盖：${dataset.coverage.overall.found} / ${dataset.coverage.overall.required} 项找到官网原文`,'覆盖率反映当前研究完成度，不是产品能力评分',['每家按相同十项研究需求计数'],{big_number:{value:`${dataset.coverage.overall.found}/${dataset.coverage.overall.required}`,label:'本次证据覆盖'}},{categories:brands,series:[{name:'有官网证据',values:dataset.coverage.rows.map(r=>r.found)},{name:'仍待研究',values:dataset.coverage.rows.map(r=>r.required-r.found)}]},all);
-  set(4,'证据路径：从页面原文到有限解释','只对官网可直接支持的能力打勾',['问号表示本次未找到，不等于厂商没有此能力'],{}, {stages:[{name:'发现',action:'官方页面',pain:'型号/地区差异',opportunity:'记录 URL'},{name:'提取',action:'原文命中',pain:'营销表述',opportunity:'保留上下文'},{name:'核验',action:'Claim → Evidence',pain:'证据范围有限',opportunity:'标记缺口'},{name:'分析',action:'有界洞察',pain:'不能越界推断',opportunity:'补内部数据'}]},all);
-  const comparisonCaps=capabilities.slice(0,3);set(5,'公开证据的共性与差异','未找到的字段保持问号，不解读为不支持',['每项结果可回溯至 Evidence ID'],{competitors:brands.map(b=>({name:b,summary:comparisonCaps.map(c=>`${c}: ${dataset.competitor_matrix.rows.find(r=>r.capability===c)?.cells[b].value??'?'}`).join('\n')}))},null,all);
-  templates[5].layout.layout_id='L09_COMPETITOR_4COL';templates[5].layout.preferred='L09_COMPETITOR_4COL';templates[5].visualization={type:'text',reason:'缺口计数对比，不代表功能不存在',data:null};
-  const gapMessage=`共 ${dataset.coverage.overall.required-dataset.coverage.overall.found} 项仍待研究，不可直接推断能力缺失`;
-  set(6,'缺口不等于竞品不支持',gapMessage,['每家按 10 项统一字段检查'],{competitors:brands.map((b,i)=>({name:b,summary:`${dataset.coverage.rows[i].found} / ${dataset.coverage.rows[i].required} 项已核验\n${dataset.coverage.rows[i].gaps.length} 项待研究\n“?” 不是“不支持”`}))},null,all);
-  set(7,'研究到策略须经过证据关口','本轮仅形成有限洞察，尚未形成 TCL 策略',['需要用户问题、内部能力和效果验证'],{}, {goal:'当前只支持官网公开能力对比',pillars:[{title:'事实',body:'原文命中\nSource URL'},{title:'解释',body:'三家样本共性\n不外推行业'},{title:'缺口',body:'型号 / 地区\n用户体验'}],foundation:'策略与功能提案：待后续 Product Reasoning 和内部资料'},all);
-  set(8,'结论可追溯至页面原文','Insight → Claim → Evidence → Source',['证据对象与推理对象分离'],{}, {layers:[{name:'Insight',items:[insight.insight_id]},{name:'Claim',items:insight.upstream_ids},{name:'Evidence',items:insight.supporting_evidence},{name:'Source',items:insight.source_ids}]},sharedEvidence);
-  set(9,'后续研究：补齐关键空白','优先核验同型号 / 同市场，再引入用户与内部数据',['此页是研究计划，不是产品 Roadmap'],{}, {phases:[{phase:'补官网资料',goal:'提高同口径覆盖',deliverables:['功能文档','型号/地区'],exit:'证据回链完整'},{phase:'体验研究',goal:'验证实际交互',deliverables:['用户任务','效果观察'],exit:'体验问题有证据'},{phase:'产品推理',goal:'提出有界机会',deliverables:['TCL 内部数据','可测假设'],exit:'策略逻辑可追溯'}]},all);
-  set(10,'THANKS','研究证据到此为止',[],{},null,[]);
-  if(localInputs.length){const localSources=localInputs.map((input,i)=>({source_id:`src-local-${i+1}`,title:input.name,source_type:'user_provided',locator:{uri:input.name,accessed_at:new Date().toISOString()},status:'provided',publisher:'用户提供',origin:'user_provided'}));allSources.push(...localSources);const excerpts=localInputs.flatMap((input,i)=>String(input.text).replace(/\[第\s*\d+\s*页\]/g,' ').split(/(?<=[。！？.!?])\s+/).map(text=>({text:text.replace(/\s+/g,' ').trim(),source:localSources[i]}))).filter(x=>x.text.length>12).slice(0,3);const local=structuredClone(templates[1]);local.title='本地材料与联网证据同时使用';local.key_message=`${localInputs.length} 个本地文件作为内部上下文，网页证据用于外部核验`;local.content={conclusion:local.key_message,analysis:excerpts.map(x=>x.text),implication:'两类证据分别标注来源，不用公开页面替代内部现状判断。',structured_data:{headline:local.key_message,findings:excerpts.map((x,i)=>({title:`本地证据 ${i+1}`,body:x.text.slice(0,150)})),decision:'仅当本地材料和外部证据在同一口径下一致时，才进一步形成产品判断。'},speaker_note:'混合模式：用户材料未上传到外部网络'};local.layout={...local.layout,layout_id:'L20_EXECUTIVE_SUMMARY',preferred:'L20_EXECUTIVE_SUMMARY'};local.sources=[...new Set(excerpts.map(x=>x.source.source_id))];local.render_options.source_labels=excerpts.map(x=>x.source.title);local.render_options.source_urls=excerpts.map(x=>x.source.locator.uri);local.evidence=excerpts.map((x,i)=>({evidence_id:`ev-local-${i+1}`,claim:x.text.slice(0,180),evidence_type:'quote',status:'supported',source_ids:[x.source.source_id],note:'用户提供的本地材料'}));local.notes=['本地材料仅在本机使用'];local.status='ready_for_renderer';templates.splice(2,0,local);}
-  templates.forEach((s,i)=>{s.slide_id=`s${String(i+1).padStart(2,'0')}`;});
-  const comparisonSlide=templates.find(s=>s.title==='公开证据的共性与差异'),gapSlide=templates.find(s=>s.title==='缺口不等于竞品不支持');
-  if(domainContext?.packs?.length){comparisonSlide.notes.push(`方法上下文：${domainContext.packs.map(x=>x.id).join(', ')}；维度：${domainContext.dimensions.join(', ')}。仅作为提问范围，不充当产品事实。`);}
-  let visualMatch={used:[],missing:[]};if(visualManifest){
-    comparisonSlide.visual_requirement={priority:'high',types:['product_image','feature_image','feature_screenshot'],entities:brands,usage:'competitor_product_context'};
-    visualMatch=matchSlideAssets(templates,visualManifest);templates.splice(0,templates.length,...visualMatch.slides);
-    const appendix=visualMatch.used.map(u=>{const a=visualManifest.assets.find(x=>x.asset_id===u.asset_id);return `- Slide ${u.slide_id}: ${u.entity} ${a.asset_type} [${a.asset_id}] — ${a.source.page_url} | asset: ${a.source.asset_url??a.source_url} | internal review only, external reuse rights unverified.`;});
-    await fs.writeFile(path.join(out,'visual-citations.md'),'# Visual Sources\n'+appendix.join('\n')+'\n');
+// Public-source readout only. No internal strategy is inferred from competitor pages.
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {citationsForSlide} from '../research/citation/index.mjs';
+import {matchSlideAssets,eligibleWebAsset} from '../research/visual/slide-matcher/index.mjs';
+import {requestedSlideCount,selectContentSlides} from '../planner/page-count.mjs';
+import {decideSlideVisual} from '../planner/visual-decision.mjs';
+import {compressResearchText} from '../visual-planner/index.mjs';
+
+const id=index=>`s${String(index).padStart(2,'0')}`;
+const uniq=values=>[...new Set(values.filter(Boolean))];
+function distinctEvidence(items){const result=[];for(const item of items){const text=item.quote_or_fact.toLowerCase().replace(/\s+/g,' ').trim();if(!result.some(previous=>{const prior=previous.quote_or_fact.toLowerCase().replace(/\s+/g,' ').trim();return prior===text||prior.includes(text)||text.includes(prior);})){result.push(item);}}return result;}
+
+function makeSpec({slide_type='content',purpose,title,key_message,title_mode='conclusion',layout='L02_HERO_INSIGHT',visualization='text',reason='来源事实以文字呈现。',data=null,structured_data={},analysis=[],implication='仅代表本次已核验公开页面；不得外推市场普及度或本方产品策略。',evidence=[],sources=[],notes=[],visual_requirement=null}){
+  const ids=uniq(evidence.map(x=>x.source_id));const links=uniq(ids.map(sourceId=>sources.find(s=>s.source_id===sourceId)?.locator?.uri));
+  return {slide_id:'s00',slide_type,purpose,title,title_mode,key_message,
+    content:{conclusion:key_message,analysis,implication,structured_data,speaker_note:null},
+    evidence:evidence.map(e=>({evidence_id:e.evidence_id,claim:e.quote_or_fact,evidence_type:'fact',status:'supported',source_ids:[e.source_id],note:`原文：${e.quote_or_fact}`})),
+    visualization:{type:visualization,reason,data},layout:{layout_id:layout,preferred:layout,fallback:[],reason,confidence:1,content_density:'medium',safe_area_token:'content_safe_area',reserved_regions:['top-right-logo']},
+    assets:[],sources:ids,notes,render_options:{source_labels:ids.map(sourceId=>{const source=sources.find(s=>s.source_id===sourceId);return `${source?.publisher??sourceId} (${source?.locator?.accessed_at?.slice(0,10)??'unknown'})`;}),source_urls:links,show_source:true,editable:true,image_fit:'contain'},status:'ready_for_renderer',
+    ...(visual_requirement?{visual_requirement}:{}),
+  };
+}
+
+function capabilityLabel(value=''){
+  const text=String(value).toLowerCase();
+  if(/preference|personal/.test(text))return '用户偏好';
+  if(/upscal|resolution|content enhancement/.test(text))return '内容增强';
+  if(/scene|content recognition|auto picture|optimization/.test(text))return '场景识别与优化';
+  if(/color|contrast/.test(text))return '色彩与对比度优化';
+  if(/ai picture|ai processing|processor|engine/.test(text))return 'AI 画质处理';
+  return String(value||'官网声明').replace(/\s*\/\s*/g,'与');
+}
+function joinChinese(values){return values.length<=1?(values[0]??'相关能力'):values.length===2?values.join('与'):`${values.slice(0,-1).join('、')}与${values.at(-1)}`;}
+
+function brandSlide(brand,items,sources,visualManifest){
+  const chosen=visualManifest?.assets?.find(a=>a.entity===brand&&eligibleWebAsset(a)&&['feature_screenshot','feature_image','product_image'].includes(a.asset_type));
+  const selected=distinctEvidence(items).slice(0,3);
+  const labels=uniq(selected.map(item=>capabilityLabel(item.capability))).slice(0,3);
+  const findings=selected.map((item,index)=>({label:labels[index]??capabilityLabel(item.capability),claim:compressResearchText(item.quote_or_fact,76),original:item.quote_or_fact,evidence_id:item.evidence_id}));
+  const capabilitySummary=joinChinese(labels);
+  const conclusion=`${brand} 的公开能力已覆盖${capabilitySummary}`;
+  const productInsight=`基于本页证据，评估 AI 画质时应同时观察${capabilitySummary}，不能只比较单一算法名称。`;
+  const visual=!!chosen;
+  return makeSpec({purpose:`呈现 ${brand} 官方页面的直接证据并提炼产品含义`,title:conclusion,key_message:conclusion,layout:visual?'L07_IMAGE_TEXT':'L02_HERO_INSIGHT',visualization:visual?'image':'text',reason:visual?'局部官网截图作为证据中心，右侧只保留经过压缩的核心发现。':'没有经核验的相关画面，用提炼后的证据结论替代装饰截图。',structured_data:{evidence_items:findings,body:findings.map(item=>`${item.label}\n${item.claim}`).join('\n\n'),product_insight:productInsight},analysis:findings.map(item=>`${item.label}：${item.claim}`),implication:productInsight,evidence:selected,sources,notes:visual?['原始外文保留在 Evidence 元数据和备注中，不作为正文主体。']:[`${brand} 未找到与本页证据匹配的可用网页截图。`],visual_requirement:visual?{priority:'high',types:['feature_screenshot','feature_image','product_image'],entities:[brand],usage:'verified_product_context'}:null});
+}
+function selectedContent(candidates,brandPages,config){
+  const count=requestedSlideCount(config);
+  if(count==null)return [...candidates.slice(0,2),...brandPages,...candidates.slice(2)];
+  const slots=count-2,core=candidates.slice(0,2),tail=candidates.slice(2);
+  if(slots<core.length)return selectContentSlides(core,count);
+  if(slots>=core.length+brandPages.length)return selectContentSlides([...core,...brandPages,...tail],count);
+  // A short deck compares all entities together; it never gives an image page to only the first brand.
+  return selectContentSlides([...core,...tail],count);
+}
+
+export async function makeEvidenceDeck(dataset,root,out,{domainContext=null,visualManifest=null,localInputs=[],config={}}={}){
+  const brief=dataset.research_plan?.brief??{},brands=brief.brands??uniq(dataset.evidence.map(e=>e.entity)),topic=brief.topic??brief.objective??'产品研究';
+  const allSources=[...dataset.sources],all=dataset.evidence;
+  const supportedBrands=brands.filter(brand=>all.some(e=>e.entity===brand));
+  const matrix=dataset.competitor_matrix?.rows??[];
+  const sharedCapability=matrix.find(row=>supportedBrands.length>=2&&supportedBrands.every(brand=>row.cells?.[brand]?.value==='✓'))?.capability;
+  const sharedEvidence=sharedCapability?all.filter(e=>e.capability===sharedCapability):all.slice(0,Math.min(3,all.length));
+  const statement=sharedCapability?`本次已核验页面中，${supportedBrands.length} 个对象均提及 ${sharedCapability}`:`本次页面证据不足以形成跨对象共同结论`;
+  const insight={insight_id:'ins-public-evidence',level:'INSIGHT',statement,upstream_ids:sharedEvidence.map(e=>e.claim_id),source_ids:uniq(sharedEvidence.map(e=>e.source_id)),supporting_evidence:sharedEvidence.map(e=>e.evidence_id),reasoning_summary:'仅限本次已核验公开页面；不推断产品效果或本方策略。',confidence:sharedCapability?'medium':'low',status:sharedCapability?'supported':'needs_evidence'};
+
+  const summary=makeSpec({slide_type:'executive_summary',purpose:'说明研究范围与能得到的有限判断',title:'本次证据只支持公开声明对照，不支持体验优劣判断',key_message:statement,structured_data:{body:`研究对象：${supportedBrands.join('、')}。本次核验 ${dataset.sources.length} 个来源，获得 ${all.length} 条可回溯证据。\n\n页面声明只说明厂商公开表述，不能证明实际体验优劣。所有结论均按页面 URL 与核验时间回溯。`},analysis:['所有页面结论均按 URL 与抓取时间回溯。'],evidence:sharedEvidence,sources:allSources});
+  const capRows=matrix.slice(0,7),comparison=makeSpec({slide_type:'comparison',purpose:'按相同维度比较各对象的公开声明',title:'官网声明只能比较“是否提及”，不能直接比较能力强弱',key_message:'问号表示本次未找到相应证据，不代表产品不支持',layout:'L10_COMPARISON_TABLE',visualization:'feature-table',reason:'多对象、多能力维度需要保留精确的行列对应；截图不能替代表格。',structured_data:{table:{headers:['能力',...supportedBrands],rows:capRows.map(row=>[row.capability,...supportedBrands.map(brand=>row.cells?.[brand]?.value??'?')])}},evidence:all,sources:allSources,notes:['✓ 只表示本次已核验页面直接支持该声明；? 表示本次未找到。']});
+  const brandPages=supportedBrands.map(brand=>brandSlide(brand,all.filter(e=>e.entity===brand),allSources,visualManifest));
+  const other=[];
+  const coverage=dataset.coverage?.rows??[];
+  if(coverage.length>=3&&coverage.length<=10&&coverage.every(row=>Number.isFinite(row.found)&&Number.isFinite(row.required))){
+    const sameDenominator=new Set(coverage.map(row=>row.required)).size===1,hasVariation=new Set(coverage.map(row=>row.found)).size>1;
+    const table={headers:['对象','已核验','计划项'],rows:coverage.map(row=>[row.brand,String(row.found),String(row.required)])};
+    const decision=decideSlideVisual({table,preferExactValues:!sameDenominator||!hasVariation});
+    other.push(makeSpec({slide_type:'metrics',purpose:'说明此次研究的证据覆盖程度',title:'证据覆盖是研究进度，不能代替产品能力评分',key_message:'证据覆盖是研究进度，不能代替产品能力评分',layout:decision.layout,visualization:decision.type,reason:!sameDenominator?'各对象计划核验项的分母不同；保留精确分子/分母，避免柱形高度误导。':decision.reason,data:decision.type==='bar-chart'?decision.data:null,structured_data:decision.type==='feature-table'?{table:decision.data}:{big_number:{value:`${dataset.coverage.overall.found}/${dataset.coverage.overall.required}`,label:'证据覆盖'}},evidence:all,sources:allSources,notes:['覆盖度量是研究过程指标，不是竞品能力或市场数据。']}));
   }
-  // Deck Plan remains the existing renderer contract, but all mock claims are replaced.
-  deck.deck_id='deck-web-evidence-2026';deck.deck_title=`${topic} 公开证据概览`;deck.core_message=insight.statement;deck.objective='对已核验公开页面做有界比较';deck.open_questions=dataset.coverage.rows.flatMap(r=>r.gaps);
-  deck.slides=templates.map((s,i)=>({slide_id:s.slide_id,sequence:i+1,section_id:i<4?'sec-evidence':i<templates.length-2?'sec-analysis':'sec-next',purpose:s.purpose??s.title,question:s.title,key_message:s.key_message,evidence_needed:(s.evidence??[]).map(e=>e.evidence_id),analysis_method:s.visualization?.type??'evidence synthesis',visualization_candidate:s.layout?.layout_id??'content',dependencies:i?[templates[i-1].slide_id]:[],...(s.visual_requirement?{visual_requirement:s.visual_requirement}:{})}));
-  await fs.mkdir(out,{recursive:true});await fs.writeFile(path.join(out,'insights.json'),JSON.stringify([insight],null,2));await fs.writeFile(path.join(out,'deck-plan.json'),JSON.stringify(deck,null,2));await fs.writeFile(path.join(out,'slide-specs.json'),JSON.stringify(templates,null,2));
-  const citations=templates.map((s,i)=>({slide:i+1,...citationsForSlide(s,all,allSources)}));await fs.writeFile(path.join(out,'citations.json'),JSON.stringify(citations,null,2));
-  await fs.writeFile(path.join(out,'sources-appendix.md'),'# Sources Appendix\n'+allSources.map((s,i)=>`[${i+1}] ${s.title}. ${s.locator.uri} (accessed ${s.locator.accessed_at})`).join('\n')+'\n'+(visualManifest?'\n## Visual Sources (internal review only)\n'+visualMatch.used.map(u=>{const a=visualManifest.assets.find(x=>x.asset_id===u.asset_id);return `- ${u.slide_id} ${u.entity} [${a.asset_id}] ${a.source.page_url} ; asset URL: ${a.source.asset_url??a.source_url} ; reuse rights unverified`;}).join('\n')+'\n':''));
-  return {deck,slides:templates,insight,visualMatch};
+  const gaps=coverage.flatMap(row=>(row.gaps??[]).slice(0,2).map(gap=>`${row.brand}：${typeof gap==='string'?gap:JSON.stringify(gap)}`));
+  if(gaps.length)other.push(makeSpec({purpose:'明确尚需核验的问题',title:'未命中的字段必须保持未知，不能写成产品不支持',key_message:'未命中的字段继续保持未知',structured_data:{body:gaps.slice(0,6).join('\n\n')},analysis:gaps.slice(0,6),evidence:[],sources:allSources,notes:['缺口是研究结果，不得写为产品能力不存在。']}));
+  if(localInputs.length){for(const [index,input] of localInputs.entries()){
+    const source={source_id:`src-local-${index+1}`,title:input.name,source_type:'user_provided',locator:{uri:input.name,accessed_at:new Date().toISOString()},status:'provided',publisher:'用户提供',origin:'user_provided'};allSources.push(source);
+    const excerpt=String(input.text??'').replace(/\[第\s*\d+\s*页\]/g,' ').replace(/\s+/g,' ').trim().slice(0,420);
+    other.push(makeSpec({purpose:'将本地事实与外部网页声明分开',title:`本地材料：${input.name}`,key_message:'本地材料作为内部上下文，公开网页只用于外部核验',structured_data:{body:excerpt},analysis:[excerpt],evidence:[{evidence_id:`ev-local-${index+1}`,source_id:source.source_id,quote_or_fact:excerpt,claim_id:`local-${index+1}`}],sources:allSources,notes:['混合模式：本地材料未上传到外部网站。']}));
+  }}
+
+  const content=selectedContent([summary,comparison,...other],brandPages,config);
+  const cover=makeSpec({slide_type:'cover',purpose:'标识公开研究主题',title:`${topic} 公开证据概览`,key_message:topic,title_mode:'topic',layout:'tcl-cover-01',visualization:'none',reason:'使用企业封面',structured_data:{subtitle:'仅限本次已核验公开页面'},sources:allSources});
+  const end=makeSpec({slide_type:'ending',purpose:'结束演示',title:'THANKS',key_message:'研究到此为止',title_mode:'topic',layout:'tcl-ending-01',visualization:'none',reason:'使用企业封底',sources:allSources});
+  let slides=[cover,...content,end];slides.forEach((slide,index)=>slide.slide_id=id(index+1));
+  const visualMatch=visualManifest?matchSlideAssets(slides,visualManifest):{slides,used:[],missing:[]};slides=visualMatch.slides;
+  const visualPlan={slots:slides.flatMap(slide=>(slide.visual_requirement?.entities??[]).map(entity=>({id:`${slide.slide_id}:${entity}`,slide_id:slide.slide_id,entity,asset_type:'product_image',required:false})))};
+  if(domainContext?.packs?.length)comparison.notes.push(`方法上下文：${domainContext.packs.map(x=>x.id).join(', ')}；只用于研究范围，不充当产品事实。`);
+  const deck={deck_id:'deck-web-evidence',deck_title:`${topic} 公开证据概览`,objective:'对已核验公开页面做有界比较',audience:[config.presentation?.audience??'产品团队'],core_message:statement,storyline:[{section_id:'sec-evidence',role:'evidence',question:'这些公开页面能直接支持什么？',answer:'保留页面原文、同维度对照及缺口'}],slides:slides.map((slide,index)=>({slide_id:slide.slide_id,sequence:index+1,section_id:'sec-evidence',purpose:slide.purpose,question:slide.title,key_message:slide.key_message,evidence_needed:slide.evidence.map(e=>e.evidence_id),analysis_method:'source-bounded synthesis',visualization_candidate:slide.visualization.type,dependencies:index?[slides[index-1].slide_id]:[]})),open_questions:gaps,renderer_entry_gate:{status:'ready',blockers:[]}};
+  await fs.mkdir(out,{recursive:true});
+  await Promise.all([
+    fs.writeFile(path.join(out,'insights.json'),JSON.stringify([insight],null,2)),
+    fs.writeFile(path.join(out,'deck-plan.json'),JSON.stringify(deck,null,2)),
+    fs.writeFile(path.join(out,'slide-specs.json'),JSON.stringify(slides,null,2)),
+    fs.writeFile(path.join(out,'visual-decisions.json'),JSON.stringify(slides.map(slide=>({slide_id:slide.slide_id,visualization:slide.visualization.type,layout_id:slide.layout.layout_id,reason:slide.visualization.reason,asset_ids:slide.assets.map(x=>x.asset_id)})),null,2)),
+    fs.writeFile(path.join(out,'citations.json'),JSON.stringify(slides.map((slide,index)=>({slide:index+1,...citationsForSlide(slide,all,allSources)})),null,2)),
+    fs.writeFile(path.join(out,'sources-appendix.md'),'# Sources Appendix\n'+allSources.map((source,index)=>`[${index+1}] ${source.title}. ${source.locator.uri} (accessed ${source.locator.accessed_at})`).join('\n')+'\n'+(visualManifest?'\n## Visual Sources (internal review only)\n'+visualMatch.used.map(match=>{const asset=visualManifest.assets.find(x=>x.asset_id===match.asset_id);return `- ${match.slide_id} ${match.entity} [${asset.asset_id}] ${asset.source.page_url}; reuse rights unverified`;}).join('\n')+'\n':'')),
+  ]);
+  return {deck,slides,insight,visualMatch,visualPlan};
 }

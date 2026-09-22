@@ -18,9 +18,9 @@
 
 ## 标准执行链
 
-`User Request -> Orchestrator -> Task Understanding -> Planning -> Skill Routing -> Research/Product Reasoning -> Insight -> Storyline -> Slide Planning -> Visualization Planning -> Slide Spec -> Renderer Entry Gate -> Rendering -> QA/Critic -> Final PPTX`
+`User Request -> Orchestrator -> Task Understanding -> Planning -> Skill Routing -> Research/Product Reasoning -> Insight -> Storyline -> Slide Planning -> Visual Planning -> Asset Processing -> Layout Planning -> Renderer Entry Gate -> Rendering -> Designer QA/Critic -> Final PPTX`
 
-第一阶段在 Slide Spec 和 QA 报告处停止。
+Visual Planner 只输出设计决策，不输出坐标；Asset Processor 处理裁切/替换；Layout Engine 才输出坐标。第一阶段在 Slide Spec、Visual Plan、Layout Plan 和 QA 报告处停止。
 
 ## Orchestrator 的职责
 

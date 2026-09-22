@@ -14,8 +14,11 @@ User Request
   -> Thinking and Analysis Skills
   -> Insight Graph
   -> Storyline and Deck Plan
-  -> Visualization Planning
-  -> Slide Specs
+  -> Slide Planning
+  -> Visual Planning (design decisions, no coordinates)
+  -> Asset Processing
+  -> Layout Planning (coordinates and regions)
+  -> Slide Specs + Visual Plan + Layout Plan
   -> Renderer Entry Gate
   -> Renderer (later phase)
   -> QA and Critic
@@ -46,7 +49,9 @@ User Request
 | Source | 来源、范围和可支持 Claim | `source.schema.json` |
 | Insight | 事实到机会/策略的可追溯推导 | `insight.schema.json` |
 | Deck Plan | 整套故事线和逐页意图 | `deck-plan.schema.json` |
-| Slide Spec | Thinking 到 Renderer 的唯一核心接口 | `slide-spec.schema.json` |
+| Slide Spec | Thinking 到 Renderer 的内容与证据接口 | `slide-spec.schema.json` |
+| Visual Plan | 主结论、视觉中心、构图、层级、删减和阅读顺序 | `visual-plan.schema.json` |
+| Layout Plan | Layout Engine 计算的安全区与具体区域坐标 | `slide-spec.schema.json` 中的 `layout_plan` |
 | Pattern | 可复用的历史逻辑/页面/视觉模式 | `pattern.schema.json` |
 
 ## 工程目录

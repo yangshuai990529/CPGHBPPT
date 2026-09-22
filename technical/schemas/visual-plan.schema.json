@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://product-ppt-agent.local/schemas/visual-plan.schema.json",
+  "title": "Slide Visual Plan",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["primary_message", "visual_center", "primary_asset", "secondary_assets", "information_hierarchy", "recommended_composition", "content_to_remove", "content_to_merge", "content_to_visualize", "image_crop_strategy", "reading_order", "design_rationale", "status", "blockers"],
+  "properties": {
+    "primary_message": {"type": "string"},
+    "visual_center": {"type": ["object", "null"]},
+    "primary_asset": {"type": ["string", "null"]},
+    "secondary_assets": {"type": "array", "items": {"type": "string"}},
+    "information_hierarchy": {"type": "array", "items": {"type": "object"}},
+    "recommended_composition": {"enum": ["Hero", "Split", "Asymmetric Split", "Grid", "Comparison", "Chart-led", "Screenshot-led", "Diagram-led", "Number-led", "Statement-led"]},
+    "content_to_remove": {"type": "array"},
+    "content_to_merge": {"type": "array"},
+    "content_to_visualize": {"type": "array"},
+    "image_crop_strategy": {"type": "string"},
+    "reading_order": {"type": "array", "items": {"type": "string"}},
+    "design_rationale": {"type": "string"},
+    "screenshot_readability": {"type": "array"},
+    "quality_precheck": {"type": "object"},
+    "status": {"enum": ["ready", "blocked"]},
+    "blockers": {"type": "array", "items": {"type": "string"}}
+  }
+}

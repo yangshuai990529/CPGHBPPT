@@ -1,5 +1,7 @@
 # CPGHB Product PPT Agent（CPGHBPPT）
 
+> 当前状态（2026-09-22）：这是可运行的阶段性实现，不是已经能自动交付部门级成品 PPT 的完整 Agent。现已加入独立 Visual Planner、Asset Processor 和 Layout Planning Gate：每页先确定主结论、视觉中心、信息层级、构图和阅读顺序，再处理截图可读性并计算坐标；没有视觉中心、分类式标题或不可读截图会在 Renderer 前阻断。证据页已支持 Hero Evidence、Evidence + Insight、Evidence Grid 和 Multi-source Evidence。联网模式对多数新主题仍需先提供核验过的 URL/待核验短语，深层语义审美与产品洞察仍需人工复核。能力详情见 [架构审计](technical/docs/architecture-audit.md)、[目标架构](technical/docs/target-architecture.md)、[迁移计划](technical/docs/migration-plan.md)和[升级 TODO](technical/docs/upgrade-todo.md)。运行 `./CPGHBPPT capabilities` 可查看代码审计基线。
+
 ## 安装步骤
 
 当前自动安装流程已在 macOS 验证。
@@ -23,7 +25,7 @@ cd CPGHBPPT
 当用户说明主题和目标后，Agent 必须再确认两项：
 
 1. 数据来源：本地数据、联网生成、本地 + 联网生成。
-2. 是否需要图片。如果需要，系统从已核验的网页或本地 PDF 直接截图为 PNG 并放入 PPT，不下载 SVG/矢量素材。
+2. 是否需要图片。系统可从已核验网页或本地 PDF 截取 PNG，并按页面论点决定是否使用；画面定位失败、比例异常或近乎空白时保留缺口，不下载 SVG/矢量装饰素材。
 
 交互执行：
 
@@ -39,12 +41,12 @@ cd CPGHBPPT
 ./CPGHBPPT build brief.md --input data.csv --source-mode hybrid --images no
 ```
 
-`web` 和 `hybrid` 模式必须先完成真实联网 Research：记录网页 URL、核验日期、原文证据和缺口，再进入内容推理。渲染器使用用户指定的企业模板母版，只在内容安全区中优化字号、层级、留白、图表和图片位置，不改动 Logo、页码、保密标识和模板结构。
+`web` 和 `hybrid` 模式必须先完成真实联网 Research：记录网页 URL、核验日期、原文证据和缺口，再进入内容推理。当前对多数新主题尚不能自动发现并核验足够来源，需要 Agent/用户先提供来源；证据不足会停止生成。渲染器沿用用户指定的企业模板母版，只在内容安全区中放置内容，不改动 Logo、页码、保密标识和模板结构；Visual Planner 会先去重、压缩、分组并选择证据页构图；Asset Processor 处理极端比例截图，Layout Engine 再产生坐标。当前仍是规则驱动的 bounded implementation，不能把机器 QA 当成人工设计验收。
 
 ## Skills：每个技能是干什么的
 
 
-CPGHBPPT 会按任务自动选择最少且足够的 Skills。标准顺序是：**Thinking 定义问题 → Research 找证据 → Analysis 形成分析 → Presentation 规划页面 → Visualization 选择表达 → Renderer 生成 PPTX → QA 检查**。
+项目设计的标准顺序是：**Thinking 定义问题 → Research 找证据 → Analysis 形成分析 → Slide Planner 规划页面 → Visual Planner 决定视觉中心和构图 → Asset Processor 处理素材 → Layout Engine 计算坐标 → Renderer 生成 PPTX → Designer QA 检查**。当前 CLI 仅完成部分 Skill/域包选择，多数 `SKILL.md` 仍是方法和契约说明，尚非自动执行的完整智能体。
 
 ### Thinking：产品推理与故事线（6 个）
 

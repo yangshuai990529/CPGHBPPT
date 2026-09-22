@@ -15,6 +15,12 @@ function repairAction(code) {
   if (code === "IMAGE_DISTORTION") return "fit_contain_or_cover";
   if (code === "CONTENT_DENSITY") return "change_layout";
   if (code === "SAFE_AREA_VIOLATION") return "reflow";
+  if (["BAD_SPACE_UTILIZATION","SPACE_UTILIZATION_LOW"].includes(code)) return "enlarge_primary_visual_or_recompose";
+  if (["SCREENSHOT_TOO_SMALL","SCREENSHOT_READABILITY_FAILED"].includes(code)) return "crop_replace_or_extract_text";
+  if (code === "VISUAL_WEIGHT_INVERTED") return "increase_primary_visual_weight";
+  if (code === "VISUAL_HIERARCHY_FLAT") return "strengthen_p1_p2_p3";
+  if (["VISUAL_CENTER_MISSING","VISUAL_PLAN_MISSING","THREE_SECOND_RULE"].includes(code)) return "rerun_visual_planner";
+  if (code === "ASSERTION_TITLE_MISSING") return "rewrite_as_assertion_title";
   return "manual_review";
 }
 function compress(spec) { if (typeof spec.content?.body === "string" && spec.content.body.length > 600) spec.content.body = `${spec.content.body.slice(0, 590)}…`; }

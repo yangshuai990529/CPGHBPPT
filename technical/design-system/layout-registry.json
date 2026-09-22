@@ -149,6 +149,130 @@
       "notes": [
         "Unused by the five sample slides; placeholder behavior requires native PowerPoint verification"
       ]
+    },
+    {
+      "layout_id": "L22_HERO_EVIDENCE",
+      "purpose": [
+        "single_official_evidence"
+      ],
+      "supported_content": [
+        "assertion_title",
+        "large_screenshot",
+        "evidence_highlight",
+        "source"
+      ],
+      "min_items": 1,
+      "max_items": 1,
+      "required_components": [
+        "Title",
+        "Image",
+        "Source"
+      ],
+      "optional_components": [
+        "Highlight",
+        "Insight"
+      ],
+      "density": [
+        "LOW",
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L23_EVIDENCE_INSIGHT"
+      ]
+    },
+    {
+      "layout_id": "L23_EVIDENCE_INSIGHT",
+      "purpose": [
+        "official_evidence_with_insight"
+      ],
+      "supported_content": [
+        "assertion_title",
+        "screenshot",
+        "findings",
+        "product_insight",
+        "source"
+      ],
+      "min_items": 2,
+      "max_items": 3,
+      "required_components": [
+        "Title",
+        "Image",
+        "Text",
+        "Insight"
+      ],
+      "optional_components": [
+        "Source"
+      ],
+      "density": [
+        "MEDIUM"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L07_IMAGE_TEXT"
+      ]
+    },
+    {
+      "layout_id": "L24_EVIDENCE_GRID",
+      "purpose": [
+        "evidence_grid"
+      ],
+      "supported_content": [
+        "assertion_title",
+        "evidence_cards",
+        "short_claims",
+        "source"
+      ],
+      "min_items": 4,
+      "max_items": 6,
+      "required_components": [
+        "Title",
+        "Image",
+        "Text"
+      ],
+      "optional_components": [
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L05_THREE_COLUMN"
+      ]
+    },
+    {
+      "layout_id": "L25_MULTI_SOURCE_EVIDENCE",
+      "purpose": [
+        "multi_source_evidence"
+      ],
+      "supported_content": [
+        "assertion_title",
+        "brand",
+        "screenshot",
+        "key_finding",
+        "source"
+      ],
+      "min_items": 2,
+      "max_items": 3,
+      "required_components": [
+        "Title",
+        "Image",
+        "Text"
+      ],
+      "optional_components": [
+        "Insight",
+        "Source"
+      ],
+      "density": [
+        "MEDIUM",
+        "HIGH"
+      ],
+      "safe_area": "content_safe_area",
+      "fallback_layouts": [
+        "L21_COMPETITOR_VISUAL_3COL"
+      ]
     }
   ],
   "content_layouts": [
