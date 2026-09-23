@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Editable corporate PPTX renderer using python-pptx (MIT). No LLM or product inference."""
-import io, json, sys, hashlib
+import io, json, sys, hashlib, re
 from copy import deepcopy
 from pathlib import Path
 from PIL import Image
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
+from pptx.enum.dml import MSO_THEME_COLOR
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.oxml.xmlchemy import OxmlElement
+from pptx.oxml.ns import qn
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
@@ -17,12 +19,29 @@ master, deck_file, slides_file, assets_file, output_file, models_file = map(Path
 slide_specs=json.loads(slides_file.read_text());assets={a['asset_id']:a for a in json.loads(assets_file.read_text()).get('assets',[])} if assets_file.exists() else {}
 prs=Presentation(str(master));original=list(prs.slides)
 if len(original)<5: raise ValueError('Corporate template must have five sample slides')
-cover=original[0];content_layout=original[2].slide_layout;ending_layout=original[4].slide_layout
+def layout_by_name(name,fallback):
+ return next((layout for layout in prs.slide_layouts if layout.name==name),fallback)
+
+cover=original[0]
+content_layout=layout_by_name('5_标题幻灯片',original[2].slide_layout)
+ending_layout=layout_by_name('8_标题幻灯片',original[4].slide_layout)
+if content_layout==ending_layout:raise ValueError('Content and ending layouts must be different corporate Master layouts')
 # Keep source cover exactly; create content/ending using the same corporate layouts.
 for sld_id in list(prs.slides._sldIdLst)[1:]:
  prs.part.drop_rel(sld_id.rId);prs.slides._sldIdLst.remove(sld_id)
-INK=RGBColor(37,37,37);MUTED=RGBColor(102,113,122);RED=RGBColor(233,0,0)
-FONT='PingFang SC';models=[];PX=96
+def authored_rgb(layout,preferred,fallback):
+ colors=re.findall(rb'<a:srgbClr[^>]+val="([0-9A-Fa-f]{6})"',layout.part.blob)
+ values={value.decode().upper() for value in colors}
+ chosen=next((value for value in preferred if value in values),fallback)
+ return RGBColor.from_string(chosen)
+
+MUTED=authored_rgb(ending_layout,['898989'],'66717A')
+RED=authored_rgb(ending_layout,['E40013','E90000','FE2C23'],'E90000')
+models=[];PX=96
+THEME_FONT_REFS={
+ 'title':{'a:latin':'+mj-lt','a:ea':'+mj-ea','a:cs':'+mj-cs'},
+ 'body':{'a:latin':'+mn-lt','a:ea':'+mn-ea','a:cs':'+mn-cs'},
+}
 
 def area(x,y,w,h):return Inches(x/PX),Inches(y/PX),Inches(w/PX),Inches(h/PX)
 def region(spec,name,default):
@@ -30,11 +49,23 @@ def region(spec,name,default):
  if not value:return default
  return (value.get('x',default[0]),value.get('y',default[1]),value.get('w',default[2]),value.get('h',default[3]))
 
-def add_text(slide,text,frame,size=16,bold=False,color=INK,kind='Text',align=PP_ALIGN.LEFT):
+def apply_master_text_style(run,kind,size,bold,color):
+ role='title' if kind=='Title' else 'body'
+ rPr=run._r.get_or_add_rPr()
+ for tag,typeface in THEME_FONT_REFS[role].items():
+  node=rPr.find(qn(tag))
+  if node is None:node=OxmlElement(tag);rPr.append(node)
+  node.set('typeface',typeface)
+ run.font.size=Pt(size);run.font.bold=bold
+ if color is None:run.font.color.theme_color=MSO_THEME_COLOR.TEXT_1
+ else:run.font.color.rgb=color
+ return role
+
+def add_text(slide,text,frame,size=16,bold=False,color=None,kind='Text',align=PP_ALIGN.LEFT):
  x,y,w,h=area(*frame);box=slide.shapes.add_textbox(x,y,w,h);tf=box.text_frame;tf.clear();tf.word_wrap=True;tf.vertical_anchor=MSO_ANCHOR.TOP;tf.margin_left=tf.margin_right=Inches(.025);tf.margin_top=tf.margin_bottom=Inches(.015)
  for i,line in enumerate(str(text or '').split('\n')):
-  p=tf.paragraphs[0] if i==0 else tf.add_paragraph();p.alignment=align;p.space_after=Pt(3);run=p.add_run();run.text=line;run.font.name=FONT;ea=OxmlElement('a:ea');ea.set('typeface',FONT);run._r.get_or_add_rPr().append(ea);cs=OxmlElement('a:cs');cs.set('typeface',FONT);run._r.get_or_add_rPr().append(cs);run.font.size=Pt(size);run.font.bold=bold;run.font.color.rgb=color
- current['elements'].append({'type':kind,'frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'minFontPt':size,'role':'source' if kind=='Source' else kind,'text':str(text or '')[:500]});return box
+  p=tf.paragraphs[0] if i==0 else tf.add_paragraph();p.alignment=align;p.space_after=Pt(3);run=p.add_run();run.text=line;apply_master_text_style(run,kind,size,bold,color)
+ current['elements'].append({'type':kind,'frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'minFontPt':size,'role':'source' if kind=='Source' else kind,'text':str(text or '')[:500],'fontSource':'master-title-theme' if kind=='Title' else 'master-body-theme'});return box
 
 def add_image(slide,ref,frame):
  a=assets.get(ref['asset_id']);
@@ -69,7 +100,7 @@ def add_native_table(slide,table_data,frame):
    cell.margin_left=Inches(.12);cell.margin_right=Inches(.1);cell.margin_top=Inches(.07);cell.margin_bottom=Inches(.06)
    cell.fill.solid();cell.fill.fore_color.rgb=RGBColor(245,245,245) if i==0 else RGBColor(255,255,255)
    for p in cell.text_frame.paragraphs:
-    for run in p.runs:run.font.name=FONT;run.font.size=Pt(16 if i==0 else 15);run.font.bold=i==0;run.font.color.rgb=INK
+    for run in p.runs:apply_master_text_style(run,'Text',16 if i==0 else 15,i==0,None)
  current['elements'].append({'type':'Table','frame':{'x':frame[0],'y':frame[1],'w':frame[2],'h':frame[3]},'role':'table','rows':len(rows),'columns':len(headers),'minFontPt':15,'text':' '.join(str(value) for row in [headers,*rows] for value in row)[:1200]})
 
 def source(slide,spec):
@@ -82,20 +113,29 @@ def notes(slide,spec):
  except Exception:pass
 
 def cover_text(shape,text,size):
- shape.text=text
- for p in shape.text_frame.paragraphs:
-  for r in p.runs:r.font.name=FONT;r.font.size=Pt(size);r.font.color.rgb=RGBColor(255,255,255)
+ sample_run=next((run for paragraph in shape.text_frame.paragraphs for run in paragraph.runs if run.text.strip()),None)
+ sample_rPr=deepcopy(sample_run._r.get_or_add_rPr()) if sample_run else None
+ sample_pPr=deepcopy(next((paragraph._p.pPr for paragraph in shape.text_frame.paragraphs if paragraph._p.pPr is not None),None))
+ tf=shape.text_frame;tf.clear();paragraph=tf.paragraphs[0]
+ if sample_pPr is not None:
+  if paragraph._p.pPr is not None:paragraph._p.remove(paragraph._p.pPr)
+  paragraph._p.insert(0,sample_pPr)
+ run=paragraph.add_run();run.text=text
+ if sample_rPr is not None:
+  existing=run._r.get_or_add_rPr();run._r.remove(existing);run._r.insert(0,sample_rPr)
+ else:apply_master_text_style(run,'Title',size,False,RGBColor(255,255,255))
 
 for idx,spec in enumerate(slide_specs):
- current={'slideNumber':idx+1,'title':spec['title'],'kind':spec['slide_type'],'elements':[]};models.append(current)
+ current={'slideNumber':idx+1,'title':spec['title'],'kind':spec['slide_type'],'elements':[],'masterLayout':None,'masterTextPolicy':'theme-references'};models.append(current)
  if idx==0:
-  slide=cover
+  slide=cover;current['masterLayout']=slide.slide_layout.name
   for shape in slide.shapes:
    if shape.name=='文本框 1':cover_text(shape,spec['title'],28)
    elif shape.name=='矩形 4':cover_text(shape,spec.get('content',{}).get('structured_data',{}).get('subtitle',''),18)
   continue
- if spec['slide_type']=='ending':prs.slides.add_slide(ending_layout);continue
- slide=prs.slides.add_slide(content_layout);add_text(slide,spec['title'],(128,28,820,58),26,True,kind='Title')
+ if spec['slide_type']=='ending':
+  slide=prs.slides.add_slide(ending_layout);current['masterLayout']=ending_layout.name;continue
+ slide=prs.slides.add_slide(content_layout);current['masterLayout']=content_layout.name;add_text(slide,spec['title'],(128,28,820,58),26,True,kind='Title')
  data=spec.get('content',{}).get('structured_data') or {};layout=spec.get('layout',{}).get('layout_id');conclusion=spec.get('content',{}).get('conclusion') or spec.get('key_message','')
  if layout=='L02_HERO_INSIGHT':
   add_text(slide,conclusion,(120,145,900,125),24,True,kind='Insight')

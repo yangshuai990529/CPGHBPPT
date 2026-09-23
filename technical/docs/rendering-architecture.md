@@ -39,6 +39,8 @@ The renderer imports `产品PPT模板.pptx`, duplicates the supplied cover, cont
 
 The imported deck uses a 1280 × 720 design canvas corresponding to 13.333 × 7.5 inches. Layout tokens are normalized to this coordinate system and converted to native PowerPoint units by the `python-pptx` renderer. The OOXML source size remains 12192000 × 6858000 EMU.
 
+The provider resolves the corporate cover, content, and ending layouts from the imported Master and records each slide's actual Master layout in `render-models.json`. The ending slide must use the corporate ending layout. Generated title and body runs reference the Master's major and minor theme fonts; authored cover text keeps its original run formatting. The build gate rejects a deck when the written slide-layout relationships differ from the intended Master layouts or when generated content contains no Master theme-font references.
+
 ## Build contract
 
 ```bash

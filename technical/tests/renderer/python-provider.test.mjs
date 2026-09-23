@@ -28,7 +28,12 @@ test('python-pptx provider preserves master and emits editable native shapes',as
  await run(python,['engine/renderer/providers/python_pptx_renderer.py',template.master,deck,slides,assets,pptx,models]);
  const check=JSON.parse(await run(python,['tools/inspect_pptx_native.py',pptx,'3','0']));
  assert.equal(check.status,'pass');assert.equal(check.slide_count,3);assert.ok(check.editable_shapes>0);
+ assert.equal(check.slide_master_count,1);assert.equal(check.slide_layout_count,6);
+ assert.deepEqual(check.slide_layouts,['2_空白','5_标题幻灯片','8_标题幻灯片']);
+ assert.ok(check.theme_font_refs>=6,'generated text should reference Master theme fonts');
  const rendered=JSON.parse(await fs.readFile(models,'utf8'));assert.equal(rendered[1].elements.some(x=>x.text?.includes('这段文字必须作为文本框写入')),true);
+ assert.deepEqual(rendered.map(page=>page.masterLayout),['2_空白','5_标题幻灯片','8_标题幻灯片']);
+ assert.ok(rendered[1].elements.every(x=>!x.text||x.fontSource?.startsWith('master-')));
 });
 
 
